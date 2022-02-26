@@ -153,7 +153,7 @@ public class ManageController {
 
             //压中
             int betMoney = NumberUtils.toInt(betRecord.getMoney());
-            betRecord.setCalculateMoney(String.valueOf((betMoney * 3) - betMoney));
+            betRecord.setCalculateMoney(String.valueOf((betMoney * 3)));
             betRecordService.updateByPrimaryKeySelective(betRecord);
         }
 
