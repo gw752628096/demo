@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <title>开盘</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<body>
+<div>
+    <table>
+        <tr>
+            <td>
+                <button id="start">开盘</button>
+            </td>
+            <td>
+                <button id="startBet">开放下注</button>
+            </td>
+            <td>
+                <button id="endBet">关闭下注</button>
+            </td>
+            <td>
+                <button id="calculateTotal">整体结算</button>
+            </td>
+        </tr>
+    </table>
+    </br>
+    <span id="resultSpan"></span>
+    </br>
+    </br>
+    <div>
+        <table id="calculateBossTable" hidden="hidden">
+            <tr>
+                <td>
+                    <select id="boss">
+                        <option value="1">雷基·冬寒（老一）</option>
+                        <option value="2">安纳塞隆（老二）</option>
+                        <option value="3">卡兹洛加（老三）</option>
+                        <option value="4">阿兹加洛（老四）</option>
+                        <option value="5">阿克蒙德（尾王）</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="one">
+
+                    </select>
+                </td>
+                <td>
+                    <select id="two">
+
+                    </select>
+                </td>
+                <td>
+                    <select id="three">
+
+                    </select>
+                </td>
+                <td>
+                    <button id="calculateBoss">boss结算</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table id="calculateTotalTable" hidden="hidden">
+
+        </table>
+    </div>
+    </br>
+    </br>
+    </br>
+    <table id="ordered">
+        <tr>
+            <td colspan="6" align="center"><p style="font-weight:bold">boss单体结算</p></td>
+        </tr>
+        <tr>
+            <td width="100" align="center">
+                boss名称
+            </td>
+            <td width="200" align="center">
+                物品
+            </td>
+            <td width="100" align="center">
+                金额
+            </td>
+            <td width="300" align="center">
+                时间
+            </td>
+            <td width="100" align="center">
+                下注昵称
+            </td>
+            <td width="100" align="center">
+                结算金额
+            </td>
+        </tr>
+        <tr th:each="order,index:${list}">
+            <td th:text="${order.bossName}" width="100" align="center"></td>
+            <td th:text="${order.goodName}" width="200" align="center"></td>
+            <td th:text="${order.money}" width="100" align="center"></td>
+            <th th:text="${order.time}" width="300" align="center"></th>
+            <th th:text="${order.nickName}" width="100" align="center"></th>
+            <th th:text="${order.calculateMoney}" width="100" align="center"></th>
+        </tr>
+    </table>
+</div>
+
+<div hidden="true" id="boss-1-option">
+    <option value="0">---</option>
+    <option value="1">崩坏腕甲</option>
+    <option value="2">嚎风护腕</option>
+    <option value="3">黑暗秘密编年史</option>
+    <option value="4">回春护腕</option>
+    <option value="5">狂暴镣铐</option>
+    <option value="6">染血肩铠</option>
+    <option value="7">神圣精金护腕</option>
+    <option value="8">寻路者护腕</option>
+    <option value="9">殉难护腕</option>
+    <option value="10">止水长靴</option>
+    <option value="11">致命腕甲</option>
+    <option value="12">追踪匕首</option>
+</div>
+<div hidden="true" id="boss-2-option">
+    <option value="0">---</option>
+    <option value="13">阿加多的腰带</option>
+    <option value="14">安纳塞隆的束缚</option>
+    <option value="15">不败的意志</option>
+    <option value="16">大主教的便鞋</option>
+    <option value="17">恶行之刃</option>
+    <option value="18">疾步长靴</option>
+    <option value="19">金色治疗胸甲</option>
+    <option value="20">狂野之柱</option>
+    <option value="21">魔化皮质便鞋</option>
+    <option value="22">闪光的钢铁护肩</option>
+    <option value="23">圣光壁垒</option>
+    <option value="24">怨怒护肩</option>
+</div>
+<div hidden="true" id="boss-3-option">
+    <option value="0">---</option>
+    <option value="25">安格莉丝塔的腰带</option>
+    <option value="26">刀锋怒火护肩</option>
+    <option value="27">沸腾怒火腰带</option>
+    <option value="28">黑羽之靴</option>
+    <option value="29">卡兹洛加之心</option>
+    <option value="30">蓝色山羊皮软靴</option>
+    <option value="31">赎罪之锤</option>
+    <option value="32">峡谷猎手腰带</option>
+    <option value="33">新月腰带</option>
+    <option value="34">驯兽者护肩</option>
+    <option value="35">阳炎锁链护腿</option>
+    <option value="36">元素导能护腿</option>
+</div>
+<div hidden="true" id="boss-4-option">
+    <option value="0">---</option>
+    <option value="37">防御者的荣耀</option>
+    <option value="38">罗德里格的雨衣</option>
+    <option value="39">秘密商人长裤</option>
+    <option value="40">弯弓护腿</option>
+    <option value="41">无尽的痛苦</option>
+    <option value="42">希望束带</option>
+</div>
+<div hidden="true" id="boss-5-option">
+    <option value="0">---</option>
+    <option value="43">阿古斯的使徒</option>
+    <option value="44">安东尼达斯的专注纹章盾</option>
+    <option value="45">混乱风暴</option>
+    <option value="46">净化节杖</option>
+    <option value="47">救世胸恺</option>
+    <option value="48">狂热追击锁甲</option>
+    <option value="49">罗宁之袍</option>
+    <option value="50">闪击强弓</option>
+    <option value="51">无尽怒气腿甲</option>
+    <option value="52">午夜胸甲</option>
+    <option value="53">永恒护腿</option>
+    <option value="54">灾变之刃</option>
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        let bossOne = $('#boss-1-option');
+        $('#one').html(bossOne.html())
+        $('#two').html(bossOne.html())
+        $('#three').html(bossOne.html())
+
+        $('#calculateBossTable').hide();
+        $('#calculateTotalTable').hide();
+    });
+
+    $('#calculateTotal').click(function () {
+        let postData = {
+            bookmaker: GetQueryString("bookmaker"),
+        }
+        //校验参数
+        $.ajax({
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            url: "/calculateTotal",
+            data: JSON.stringify(postData),
+            success: function (result) {
+                if(result.code !== 0){
+                    alert(result.message);
+                }
+
+                var tableContent="<tr><td colspan='2' align='center'><p style='font-weight:bold'>整体结算</p></td></tr><tr><td width='100' align='center'>游戏id</td><td width='100' align='center'>金额</td></tr>";
+                $('#calculateTotalTable').html(tableContent);
+                $.each(result.totalBetRecordVoList, function(i,item){
+                    var content="<tr><td width='100' align='center'>"+item.nickName+"</td><td width='100' align='center'>"+item.calculateMoney+"</td>></tr>";
+                    $('#calculateTotalTable').append(content);
+                });
+
+                $('#calculateTotalTable').show();
+                $('#calculateBossTable').hide();
+            },
+            error: function (result) {
+                alert("失败请重试");
+            }
+        });
+    });
+
+    $('#calculateBoss').click(function () {
+        let postData = {
+            chooseBoss: $('#boss').val(),
+            one: {
+                id: $('#one').val(),
+            },
+            two: {
+                id: $('#two').val(),
+            },
+            three: {
+                id: $('#three').val(),
+            },
+            bookmaker: GetQueryString("bookmaker"),
+        }
+        //校验参数
+        $.ajax({
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            url: "/calculateBoss",
+            data: JSON.stringify(postData),
+            success: function (result) {
+                alert(result);
+            },
+            error: function (result) {
+                alert("失败请重试");
+            }
+        });
+    });
+
+    $('#start').click(function () {
+        let bookmaker = GetQueryString("bookmaker");
+        //校验参数
+        $.ajax({
+            type: "POST",
+            contentType: "application/text;charset=UTF-8",
+            url: "/start",
+            data: bookmaker,
+            success: function (result) {
+                $('#resultSpan').text(result);
+                $('#calculateBossTable').hide();
+                $('#calculateTotalTable').hide();
+            },
+            error: function (result) {
+                alert("失败请重试");
+            }
+        });
+    });
+
+    $('#startBet').click(function () {
+        let bookmaker = GetQueryString("bookmaker");
+        //校验参数
+        $.ajax({
+            type: "POST",
+            contentType: "application/text;charset=UTF-8",
+            url: "/startBet",
+            data: bookmaker,
+            success: function (result) {
+                $('#resultSpan').text(result);
+                $('#calculateBossTable').hide();
+                $('#calculateTotalTable').hide();
+            },
+            error: function (result) {
+                alert("失败请重试");
+            }
+        });
+    });
+
+    $('#endBet').click(function () {
+        let bookmaker = GetQueryString("bookmaker");
+        //校验参数
+        $.ajax({
+            type: "POST",
+            contentType: "application/text;charset=UTF-8",
+            url: "/endBet",
+            data: bookmaker,
+            success: function (result) {
+                $('#resultSpan').text(result);
+                $('#calculateBossTable').show();
+            },
+            error: function (result) {
+                alert("失败请重试");
+            }
+        });
+    });
+
+    $('#boss').change(function () {
+        if ($(this).val() === '1') {
+            let bossOne = $('#boss-1-option');
+            $('#one').html(bossOne.html())
+            $('#two').html(bossOne.html())
+            $('#three').html(bossOne.html())
+        }
+        if ($(this).val() === '2') {
+            let bossTwo = $('#boss-2-option');
+            $('#one').html(bossTwo.html())
+            $('#two').html(bossTwo.html())
+            $('#three').html(bossTwo.html())
+        }
+        if ($(this).val() === '3') {
+            let bossThree = $('#boss-3-option');
+            $('#one').html(bossThree.html())
+            $('#two').html(bossThree.html())
+            $('#three').html(bossThree.html())
+        }
+        if ($(this).val() === '4') {
+            let bossFour = $('#boss-4-option');
+            $('#one').html(bossFour.html())
+            $('#two').html(bossFour.html())
+            $('#three').html(bossFour.html())
+        }
+        if ($(this).val() === '5') {
+            let bossFive = $('#boss-5-option');
+            $('#one').html(bossFive.html())
+            $('#two').html(bossFive.html())
+            $('#three').html(bossFive.html())
+        }
+    })
+
+    function GetQueryString(url){
+        var reg = new RegExp("(^|&)"+ url +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+
+
+
+
+
+
+
+
+
+</script>
+</html>

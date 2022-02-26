@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.demo.mapper.BetRecordDao">
+
+    <resultMap id="BaseResultMap" type="com.spring.demo.po.BetRecord">
+        <result property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="bookmaker" column="BOOKMAKER"/>
+        <result property="activityId" column="ACTIVITY_ID"/>
+        <result property="bossId" column="BOSS_ID"/>
+        <result property="goodsId" column="GOODS_ID"/>
+        <result property="money" column="MONEY"/>
+        <result property="calculateMoney" column="CALCULATE_MONEY"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="delFlag" column="DEL_FLAG"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID ,USER_ID ,BOOKMAKER ,ACTIVITY_ID ,BOSS_ID ,GOODS_ID ,MONEY ,CALCULATE_MONEY ,CREATE_TIME ,DEL_FLAG
+    </sql>
+
+    <sql id="findWhere">
+        <where>
+            <if test="null!=userId">
+                AND USER_ID = #{userId}
+            </if>
+            <if test="null!=bookmaker and ''!=bookmaker ">
+                AND BOOKMAKER = #{bookmaker}
+            </if>
+            <if test="null!=activityId and ''!=activityId ">
+                AND ACTIVITY_ID = #{activityId}
+            </if>
+            <if test="null!=bossId">
+                AND BOSS_ID = #{bossId}
+            </if>
+            <if test="null!=goodsId">
+                AND GOODS_ID = #{goodsId}
+            </if>
+            <if test="null!=money and ''!=money ">
+                AND MONEY = #{money}
+            </if>
+            <if test="null!=calculateMoney and ''!=calculateMoney ">
+                AND CALCULATE_MONEY = #{calculateMoney}
+            </if>
+            <if test="null!=createTimeBegin">
+                AND CREATE_TIME >= #{createTimeBegin}
+            </if>
+            <if test="null!=createTimeEnd">
+                AND CREATE_TIME &lt; #{createTimeEnd}
+            </if>
+            <if test="null!=delFlag">
+                AND DEL_FLAG = #{delFlag}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.spring.demo.po.BetRecord">
+        INSERT INTO bet_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                ID  ,
+            </if>
+            <if test="null!=userId">
+                USER_ID  ,
+            </if>
+            <if test="null!=bookmaker">
+                BOOKMAKER  ,
+            </if>
+            <if test="null!=activityId">
+                ACTIVITY_ID  ,
+            </if>
+            <if test="null!=bossId">
+                BOSS_ID  ,
+            </if>
+            <if test="null!=goodsId">
+                GOODS_ID  ,
+            </if>
+            <if test="null!=money">
+                MONEY  ,
+            </if>
+            <if test="null!=calculateMoney">
+                CALCULATE_MONEY  ,
+            </if>
+            <if test="null!=createTime">
+                CREATE_TIME  ,
+            </if>
+            <if test="null!=delFlag">
+                DEL_FLAG
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                #{id, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=userId">
+                #{userId, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=bookmaker">
+                #{bookmaker, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=activityId">
+                #{activityId, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=bossId">
+                #{bossId, jdbcType=INTEGER} ,
+            </if>
+            <if test="null!=goodsId">
+                #{goodsId, jdbcType=INTEGER} ,
+            </if>
+            <if test="null!=money">
+                #{money, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=calculateMoney">
+                #{calculateMoney, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=createTime">
+                #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=delFlag">
+                #{delFlag, jdbcType=TINYINT}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.spring.demo.po.BetRecord">
+        UPDATE bet_record
+        <set>
+            <if test="null!=userId">
+                USER_ID = #{userId, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=bookmaker and ''!=bookmaker ">
+                BOOKMAKER = #{bookmaker, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=activityId and ''!=activityId ">
+                ACTIVITY_ID = #{activityId, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=bossId">
+                BOSS_ID = #{bossId, jdbcType=INTEGER} ,
+            </if>
+            <if test="null!=goodsId">
+                GOODS_ID = #{goodsId, jdbcType=INTEGER} ,
+            </if>
+            <if test="null!=money and ''!=money ">
+                MONEY = #{money, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=calculateMoney and ''!=calculateMoney ">
+                CALCULATE_MONEY = #{calculateMoney, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=createTime">
+                CREATE_TIME = #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=delFlag">
+                DEL_FLAG = #{delFlag, jdbcType=TINYINT}
+            </if>
+        </set>
+        WHERE
+        ID = #{id}
+    </update>
+
+    <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM bet_record
+        WHERE
+        ID = #{id}
+    </select>
+
+    <select id="getListByCondition" parameterType="com.spring.demo.query.BetRecordQuery" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM bet_record
+        <include refid="findWhere"/>
+    </select>
+</mapper>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.demo.mapper.UserInfoDao">
+    <resultMap id="BaseResultMap" type="com.spring.demo.po.UserInfo">
+        <result property="id" column="ID"/>
+        <result property="loginValue" column="LOGIN_VALUE"/>
+        <result property="nickName" column="NICK_NAME"/>
+        <result property="pd" column="PD"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="delFlag" column="DEL_FLAG"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID ,LOGIN_VALUE ,NICK_NAME ,PD ,CREATE_TIME ,UPDATE_TIME ,DEL_FLAG
+    </sql>
+
+    <sql id="findWhere">
+        <where>
+            <if test="null!=loginValue and ''!=loginValue ">
+                AND LOGIN_VALUE = #{loginValue}
+            </if>
+            <if test="null!=nickName and ''!=nickName ">
+                AND NICK_NAME = #{nickName}
+            </if>
+            <if test="null!=pd and ''!=pd ">
+                AND PD = #{pd}
+            </if>
+            <if test="null!=createTimeBegin">
+                AND CREATE_TIME >= #{createTimeBegin}
+            </if>
+            <if test="null!=createTimeEnd">
+                AND CREATE_TIME &lt; #{createTimeEnd}
+            </if>
+            <if test="null!=updateTimeBegin">
+                AND UPDATE_TIME >= #{updateTimeBegin}
+            </if>
+            <if test="null!=updateTimeEnd">
+                AND UPDATE_TIME &lt; #{updateTimeEnd}
+            </if>
+            <if test="null!=delFlag">
+                AND DEL_FLAG = #{delFlag}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="saveSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.spring.demo.po.UserInfo">
+        INSERT INTO USER_INFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                ID ,
+            </if>
+            <if test="null!=loginValue">
+                LOGIN_VALUE ,
+            </if>
+            <if test="null!=nickName">
+                NICK_NAME ,
+            </if>
+            <if test="null!=pd">
+                PD ,
+            </if>
+            <if test="null!=createTime">
+                CREATE_TIME ,
+            </if>
+            <if test="null!=updateTime">
+                UPDATE_TIME ,
+            </if>
+            <if test="null!=delFlag">
+                DEL_FLAG
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                #{id, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=loginValue">
+                #{loginValue, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=nickName">
+                #{nickName, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=pd">
+                #{pd, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=createTime">
+                #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=updateTime">
+                #{updateTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=delFlag">
+                #{delFlag, jdbcType=TINYINT}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.spring.demo.po.UserInfo">
+        UPDATE USER_INFO
+        <set>
+            <if test="null!=loginValue and ''!=loginValue ">
+                LOGIN_VALUE = #{loginValue, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=nickName and ''!=nickName ">
+                NICK_NAME = #{nickName, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=pd and ''!=pd ">
+                PD = #{pd, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=createTime">
+                CREATE_TIME = #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=updateTime">
+                UPDATE_TIME = #{updateTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=delFlag">
+                DEL_FLAG = #{delFlag, jdbcType=TINYINT}
+            </if>
+        </set>
+        WHERE
+        ID = #{id}
+    </update>
+
+    <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM USER_INFO
+        WHERE
+        ID = #{id}
+    </select>
+
+    <select id="getListByCondition" parameterType="com.spring.demo.query.UserInfoQuery" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM USER_INFO
+        <include refid="findWhere"/>
+    </select>
+
+    <select id="getByLoginValue" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM USER_INFO WHERE LOGIN_VALUE = #{loginValue} AND DEL_FLAG = 0
+    </select>
+
+    <select id="getByNickName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM USER_INFO WHERE NICK_NAME = #{nickName} AND DEL_FLAG = 0
+    </select>
+</mapper>

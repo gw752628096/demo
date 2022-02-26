@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.demo.mapper.BossCalculateRecordDao">
+
+    <resultMap id="BaseResultMap" type="com.spring.demo.po.BossCalculateRecord">
+        <result property="id" column="ID"/>
+        <result property="bookmaker" column="BOOKMAKER"/>
+        <result property="activityId" column="ACTIVITY_ID"/>
+        <result property="bossId" column="BOSS_ID"/>
+        <result property="one" column="ONE"/>
+        <result property="two" column="TWO"/>
+        <result property="three" column="THREE"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="delFlag" column="DEL_FLAG"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID ,BOOKMAKER ,ACTIVITY_ID ,BOSS_ID ,`ONE` ,TWO ,THREE ,CREATE_TIME ,DEL_FLAG 
+    </sql>
+
+    <sql id="findWhere">
+        <where>
+            <if test="null!=bookmaker and ''!=bookmaker ">
+                AND BOOKMAKER = #{bookmaker}
+            </if>
+            <if test="null!=activityId and ''!=activityId ">
+                AND ACTIVITY_ID = #{activityId}
+            </if>
+            <if test="null!=bossId">
+                AND BOSS_ID = #{bossId}
+            </if>
+            <if test="null!=one">
+                AND ONE = #{one}
+            </if>
+            <if test="null!=two">
+                AND TWO = #{two}
+            </if>
+            <if test="null!=three">
+                AND THREE = #{three}
+            </if>
+            <if test="null!=createTimeBegin">
+                AND CREATE_TIME >= #{createTimeBegin}
+            </if>
+            <if test="null!=createTimeEnd">
+                AND CREATE_TIME &lt; #{createTimeEnd}
+            </if>
+            <if test="null!=delFlag">
+                AND DEL_FLAG = #{delFlag}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.spring.demo.po.BossCalculateRecord">
+        INSERT INTO boss_calculate_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                ID  ,
+            </if>
+            <if test="null!=bookmaker">
+                BOOKMAKER  ,
+            </if>
+            <if test="null!=activityId">
+                ACTIVITY_ID  ,
+            </if>
+            <if test="null!=bossId">
+                BOSS_ID  ,
+            </if>
+            <if test="null!=one">
+                `ONE`  ,
+            </if>
+            <if test="null!=two">
+                TWO  ,
+            </if>
+            <if test="null!=three">
+                THREE  ,
+            </if>
+            <if test="null!=createTime">
+                CREATE_TIME  ,
+            </if>
+            <if test="null!=delFlag">
+                DEL_FLAG  
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                #{id, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=bookmaker">
+                #{bookmaker, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=activityId">
+                #{activityId, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=bossId">
+                #{bossId, jdbcType=INTEGER} ,
+            </if>
+            <if test="null!=one">
+                #{one, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=two">
+                #{two, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=three">
+                #{three, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=createTime">
+                #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=delFlag">
+                #{delFlag, jdbcType=TINYINT} 
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.spring.demo.po.BossCalculateRecord">
+        UPDATE boss_calculate_record
+        <set>
+			<if test="null!=bookmaker and ''!=bookmaker ">
+                BOOKMAKER = #{bookmaker, jdbcType=VARCHAR} ,
+			</if>
+			<if test="null!=activityId and ''!=activityId ">
+                ACTIVITY_ID = #{activityId, jdbcType=VARCHAR} ,
+			</if>
+		    <if test="null!=bossId">
+                BOSS_ID = #{bossId, jdbcType=INTEGER} ,
+		    </if>
+		    <if test="null!=one">
+                `ONE` = #{one, jdbcType=BIGINT} ,
+		    </if>
+		    <if test="null!=two">
+                TWO = #{two, jdbcType=BIGINT} ,
+		    </if>
+		    <if test="null!=three">
+                THREE = #{three, jdbcType=BIGINT} ,
+		    </if>
+		    <if test="null!=createTime">
+                CREATE_TIME = #{createTime, jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="null!=delFlag">
+                DEL_FLAG = #{delFlag, jdbcType=TINYINT} 
+		    </if>
+        </set>
+        WHERE
+            ID = #{id} 
+    </update>
+
+    <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List" />
+        FROM boss_calculate_record
+        WHERE
+            ID = #{id} 
+    </select>
+
+    <select id="getListByCondition" parameterType="com.spring.demo.query.BossCalculateRecordQuery" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM boss_calculate_record
+            <include refid="findWhere"/>
+    </select>
+</mapper>

@@ -1,0 +1,87 @@
+mvn clean package -T 1C -Dmaven.test.skip=true  -Dmaven.compile.fork=true
+
+https://www.dd373.com/s-eja7u2-c-jk5sj0-0r2mut-w2gph5-jt3fk1.html
+
+CREATE TABLE `xxx_xxx` (
+  `ID` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `CREATE_TIME` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间戳',
+  `UPDATE_TIME` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间戳',
+  PRIMARY KEY (`ID`),
+  KEY `IDX_CTIME`(`CREATE_TIME`),
+  KEY `IDX_UTIME`(`UPDATE_TIME`)
+) ENGINE=InnoDB COMMENT 'xxx实体';
+dae@2017
+
+#DataSourceSettings#
+#LocalDataSource: 51
+#BEGIN#
+<data-source source="LOCAL" name="51" uuid="a27d54bd-b46b-40f8-938d-e1609a0ddd9c"><database-info product="MySQL" version="5.7.31-log" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.25 (Revision: 08be9e9b4cba6aa115f9b27b215887af40b159e0)" dbms="MYSQL" exact-version="5.7.31" exact-driver-version="8.0"><extra-name-characters>#@</extra-name-characters><identifier-quote-string>`</identifier-quote-string></database-info><case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/><driver-ref>mysql.8</driver-ref><synchronize>true</synchronize><jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver><jdbc-url>jdbc:mysql://10.238.160.51:3306</jdbc-url><secret-storage>master_key</secret-storage><user-name>dae</user-name><schema-mapping><introspection-scope><node kind="schema"><name qname="passport"/><name qname="xiaodai"/></node></introspection-scope></schema-mapping><working-dir>$ProjectFileDir$</working-dir></data-source>
+#END#
+
+工作日：许明新、李嘉星、郭伟、王彬、师国静、张磊、宗朝、王帅鑫、仵陈西、许浩翔
+周末节假日：许明新、师国静、王彬、罗永振、郭伟、张磊、宗朝、王帅鑫、李嘉星、仵陈西、许浩翔
+
+
+登录：
+
+1.在轮询token是否过期接口返回token已过期后，客户端主动请求token登出接口，此时会返回登录设备、登录时间等信息
+
+2.新增人脸识别结果通知接口，在登录时若需要人脸验证，则将验证结果通知服务器，此时返回token用户登录
+
+
+获取token接口缓存当前登录设备，缓存token信息
+
+返回是否需要人脸识别验证  用户无统一金融账号，无需校验
+
+新增轮询接口，返回当前token是否失效 过滤brand-weiboqianbao
+
+金融账户有设备信息 用户登录时没有设备信息 校验
+金融账户有设备信息 用户登录时有设备信息但不同 校验
+金融账户有设备信息 token中的设备id与当前登录设备id不一致 token失效登出
+
+
+alter table user_fake_quota_amount
+	add AFTER_CAL_AMOUNT decimal(10,2) unsigned zerofill default NULL null;
+
+
+
+//升级时二要素冲突
+passport_pull_data_redis_key_5978926035748695983_1874342323
+
+[{"recordId":3,"wbId":"1874342323","mobile":"13601253204","realName":"孙德森","idCardNum":"370321199103262410","creditFlag":true,"productCode":"jieqian"},{"recordId":4,"wbId":"1874342323","mobile":"18514232353","creditFlag":false,"productCode":"financing"}]
+
+//升级时手机号冲突
+passport_pull_data_redis_key_5691418096627442205_8779385
+
+[{"recordId":1,"wbId":"8779385","mobile":"18811408967","realName":"白一","idCardNum":"110101197606011476","creditFlag":true,"productCode":"jieqian"},{"recordId":2,"wbId":"8779385","mobile":"18514232353","creditFlag":false,"productCode":"financing"}]
+
+
+
+
+距离wa
+!WA:2!TnvZVTrru8ACKQ0ka1AbovvqLLHMBeLpk9eTPzTwtsKBsy9MpA5GZS7mR9aRNz5nZ6gNJR4aNJApIa5dCIt(ch4gI)agfXFb5s5gs9aWrEZUUajkVlZmV537ZFVxL21gwJwJ(nFaiZ0jCbd2zVGoBUTxAtkxLMqghWow3lwcdj6Edjh7te9zZE7kKObhVtCSIPRm9)zq683D5fhYffOB8rnU7RT8m1acv(SNuAZ7DTPer0ajSRKl0HT82oWZp9dVIi)FEBMgZCP3iktPLdTW2lLs0mF2iMqFojd1s08Od4u9a31XNajsZLc199vAcODcJ5cUAGJlEODY1aVFFgOE7fGzx)tx94uMBg(T5TMwwgTgWI(YZvzHfHPBwCm)4P9ATE3GEDdw3paYef)4AtGCAgqSXS2Y(G18vwELLmZhIHVptNNPy9So)iFbzit5KRszjjBsvoNA)QWIJ(3yTlWWy53DxVoDo3(pjujHWhlPiOcS9KPmmEsO5N8GjuwiMCbybaB41z327150mXScRUzEtJ0BA7hJybL6S(5hV2RqkGbcsY(yNat8p)ufljUGzmoUXsHo9gTb(jn(SmcfJfPrqWemd9z9TTwh3ejHUpwGjygx3FywIM7aNGJiyz9g(rjeLQU5EoUyPgvEHFcZEj368U4JLNnECy54r1jqHVTvIRgP5jrsbLxWKpDb)ilF028UvZhraojmHzUJ)issgR2h3uMIDciAGT5OUD98uW2H0J9JKjsybZdTgAwZChZJkr)Whyw)2lyE0wv2yT)47SY3xTQX106cyBUYsxeC1nw7xFUvEXvaE1lcgX(Y)Yk)DLRa89UeympE(7uifGnT2Qkk5ptc0dasA(bZUaFbUgWJhBCMOLrJkjVBvP3lAYPH)(p9TV8h(5ZWjsClBN0IwNZ0yah66QTKy1xvUb22QY2Od72Y3ZB7vY40PFAhv0spEZd6(0VkeB9X8(oW4sUj59NwYvTS9ZTQuPs1j4mkJwS091V5uUOCrfJy90BX7lKaBwc4zNP9aqcQJoLi4LOUV5MTp71Bn9SRFGIzjCLPUzUFHru2uMj6RhC9C7lB2AMZDiHlAB23CGfM5WRBEcEu7YAQP8xDXvxCPAJ(Td)N
+
+
+
+INSERT INTO passport.third_pull_data_record (ID, LOGIN_ID, MOBILE, WB_ID, REAL_NAME, ID_CARD_NO, USER_STATUS, DATA_FROM, BATCH_ORDER_NO, PRODUCT_CODE, CHANNEL, CREATE_TIME, UPDATE_TIME, DEL_FLAG, MOBILE_CIPHER, REAL_NAME_CIPHER, ID_CARD_NO_CIPHER, MOBILE_old, ID_CARD_NO_old, REAL_NAME_old) VALUES (1, '5691418096627442205', '18811408967', '8779385', '白一', '110101197606011476', '0', 'jieqian', '10163747851540300088', 'passport', 'weibo', '2021-11-21 14:57:22', '2021-11-24 10:56:26', 0, '9bXMBtfKyKhqvoDTti3Wpg==', '6+JWJPGO+1XPO4WyLdksjQ==', '29G/5mBbLwnDHo9NvEK1/4wtSjIDfS18O67TKx3aOn4=', '', null, null);
+INSERT INTO passport.third_pull_data_record (ID, LOGIN_ID, MOBILE, WB_ID, REAL_NAME, ID_CARD_NO, USER_STATUS, DATA_FROM, BATCH_ORDER_NO, PRODUCT_CODE, CHANNEL, CREATE_TIME, UPDATE_TIME, DEL_FLAG, MOBILE_CIPHER, REAL_NAME_CIPHER, ID_CARD_NO_CIPHER, MOBILE_old, ID_CARD_NO_old, REAL_NAME_old) VALUES (2, '5691418096627442205', '18514232353', '8779385', null, null, '0', 'financing', '10163747851540300088', 'passport', 'weibo', '2021-11-21 15:08:36', '2021-11-24 10:56:26', 0, 'AmONF6tLOPbGuwxuekgN8g==', null, null, '', null, null);
+INSERT INTO passport.third_pull_data_record (ID, LOGIN_ID, MOBILE, WB_ID, REAL_NAME, ID_CARD_NO, USER_STATUS, DATA_FROM, BATCH_ORDER_NO, PRODUCT_CODE, CHANNEL, CREATE_TIME, UPDATE_TIME, DEL_FLAG, MOBILE_CIPHER, REAL_NAME_CIPHER, ID_CARD_NO_CIPHER, MOBILE_old, ID_CARD_NO_old, REAL_NAME_old) VALUES (3, '5978926035748695983', '13601253204', '1874342323', '孙德森', '370321199103262410', '0', 'jieqian', '10163763468162200020', 'passport', 'weibo', '2021-11-23 10:31:22', '2021-11-24 10:57:59', 0, 'edcFFhHYoDtxmi21WRNqBQ==', 'mZGrPpjVnAa1eIbAIswHmA==', 'ImqJXAXwPCmEtiM/sE/7ljJhRsfpv6iIgZRhnah8Bd0=', '', null, null);
+INSERT INTO passport.third_pull_data_record (ID, LOGIN_ID, MOBILE, WB_ID, REAL_NAME, ID_CARD_NO, USER_STATUS, DATA_FROM, BATCH_ORDER_NO, PRODUCT_CODE, CHANNEL, CREATE_TIME, UPDATE_TIME, DEL_FLAG, MOBILE_CIPHER, REAL_NAME_CIPHER, ID_CARD_NO_CIPHER, MOBILE_old, ID_CARD_NO_old, REAL_NAME_old) VALUES (4, '5978926035748695983', '18514232353', '1874342323', null, null, '0', 'financing', '10163763468162200020', 'passport', 'weibo', '2021-11-23 10:57:14', '2021-11-24 10:57:59', 0, 'edcFFhHYoDtxmi21WRNqBQ==', null, null, '', null, null);
+
+
+项目经历
+统一金融账户
+1.独立负责统一金融账户的需求梳理、方案制定，同时负责资源协调、组间合作
+2.负责后端功能开发，如账户体系、账号冲突解决、对外api接口等
+3.项目使用spring整合，dubbo服务通信，redis缓存，mysql数据库，xDiamond配置中心、rabbitMq消息中间件，Maven依赖管理
+
+微博借钱
+1.主要包含贷前审核、贷中放款、还款、资方渠道接入等功能模块
+2.负责借钱过程中，贷前审核、授信、放款功能的实现，确保用户借钱授信的稳定性
+3.项目使用spring整合，dubbo服务通信，redis缓存，mysql数据库，xDiamond配置中心、rabbitMq消息中间件，Maven依赖管理
+
+小米直播
+1.小米直播活动开发，提供礼物秒杀、排行榜、节日直播活动等功能的开发，确保直播过程中数据的稳定性。
+2.负责后端开发，主要使用redis存储数据，实现高并发情况下的接口响应速度
+3.项目使用springBoot开发，redis缓存，zookeeper配置中心，Maven依赖管理
+

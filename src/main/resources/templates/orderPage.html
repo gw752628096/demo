@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <title>海山</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<body>
+<div id="divMain">
+    <div style="padding: 10px 15px">
+        <center bgcolor="#FFFFFF" style="margin: 0; padding: 0; background-color: #FFFFFF;">
+            <table bgcolor="#002650" style="background-color: #002650;" class="">
+                <tr>
+                    <td bgcolor="#002650" style="background-color: #002650;">
+                        <table class="" width="600" border="0" cellpadding="0" cellspacing="0" align="center"
+                               valign="top" bgcolor="#001845"
+                               style="width: 600px; min-width: 600px; border-spacing: 0; border-collapse: collapse; margin: 0 auto; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word; background-color: #001845;">
+                            <tr>
+                                <td class="" align="center">
+                                    <table class="" width="600" border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="" style="padding: 10px 0;" bgcolor="#001845">
+                                                <table width="100%" cellspacing="0" cellpadding="0" border="0"
+                                                       style="width: 100%; min-width: 100%; border-spacing: 0; border-collapse: collapse; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word;">
+                                                    <tr>
+                                                        <td class="" style="padding: 0 3px 0 40px;" align="right">
+                                                            <img src="http://media.blizzard.com/emails/global/battlenet/icon-lock.png"
+                                                                 width="10" height="13"
+                                                                 style=" font-size: 14px; display: block; margin: 0; padding: 0; text-decoration: none; color: #7ca2cb; "
+                                                                 alt="Warning" border="0" class="">
+                                                        </td>
+                                                        <td class=""
+                                                            style=" font-size: 10px; line-height: 14px; text-align: left; text-decoration: none; padding: 0 40px 0 3px; color: #7ca2cb;"
+                                                            align="left">单位:G
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="" width="600" border="0" cellpadding="0" cellspacing="0" align="center"
+                               valign="top" bgcolor="#002650"
+                               style="width: 600px; min-width: 600px; border-spacing: 0; border-collapse: collapse; margin: 0 auto; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word; background-color: #002650;">
+                            <tr>
+                                <td class="" align="center">
+                                    <table class="" width="600" border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="" bgcolor="#002650">
+                                                <table width="100%" cellspacing="0" cellpadding="0" border="0"
+                                                       style="width: 100%; min-width: 100%; border-spacing: 0; border-collapse: collapse; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word;">
+                                                    <tr>
+                                                        <td>
+                                                            <img src="http://media.blizzard.com/emails/global/battlenet/image-battlenet-banner-header.jpg"
+                                                                 width="100%" height="100%"
+                                                                 style=" font-size: 14px; display: block; margin: 0; padding: 0; text-decoration: none; color: #7ca2cb; "
+                                                                 alt="This is an image" border="0" class="">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="" width="600" border="0" cellpadding="0" cellspacing="0" align="center"
+                               valign="top" bgcolor="#002650"
+                               style="width: 600px; min-width: 600px; border-spacing: 0; border-collapse: collapse; margin: 0 auto; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word; background-color: #002650;">
+                            <tr>
+                                <td class="" style="padding: 0;" align="center">
+                                    <table class="" width="600" border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td bgcolor="#002650">
+                                                <table width="100%" cellspacing="0" cellpadding="0" border="0"
+                                                       style="width: 100%; min-width: 100%; border-spacing: 0; border-collapse: collapse; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word;">
+                                                    <tr>
+                                                        <table width="100%" cellspacing="0" cellpadding="0" border="0"
+                                                               style="width: 100%; min-width: 100%; border-spacing: 0; border-collapse: collapse; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word;"
+                                                               id="loginTable">
+                                                            <tr>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                    <p style="font-size: 16px">用户名</p>
+                                                                </td>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                    <p style="font-size: 16px">密码</p>
+                                                                </td>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                    <input id="loginValue" placeholder="用户名"/>
+                                                                </td>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                    <input id="pd" type="password" placeholder="密码"/>
+                                                                </td>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                    <button id="login"
+                                                                            style="background-color: #4CAF50; border: none;font-size: 14px;">
+                                                                        登录
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </tr>
+                                                    <tr>
+                                                        <table width="100%" cellspacing="0" cellpadding="0" border="0"
+                                                               style="width: 100%; min-width: 100%; border-spacing: 0; border-collapse: collapse; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word;">
+                                                            <tr>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                    <p style="font-size: 16px">选择boss</p>
+                                                                </td>
+                                                                <td>
+                                                                    <select id="boss" onchange="changeBoss(this)">
+                                                                        <option value="1">雷基·冬寒（老一）</option>
+                                                                        <option value="2">安纳塞隆（老二）</option>
+                                                                        <option value="3">卡兹洛加（老三）</option>
+                                                                        <option value="4">阿兹加洛（老四）</option>
+                                                                        <option value="5">阿克蒙德（尾王）</option>
+                                                                    </select>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px 40px; color: #bbbbbb;">
+                                                                    <p>物品1</p>
+                                                                    <select id="one">
+                                                                    </select>
+                                                                </td>
+                                                                <td><input placeholder="金额" id="one-money"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px 40px; color: #bbbbbb;">
+                                                                    <p>物品2</p>
+                                                                    <select id="two">
+                                                                    </select>
+                                                                </td>
+                                                                <td><input placeholder="金额" id="two-money"/></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px 40px; color: #bbbbbb;">
+                                                                    <p>物品3</p>
+                                                                    <select id="three">
+
+                                                                    </select>
+                                                                </td>
+                                                                <td><input placeholder="金额" id="three-money"/></td>
+                                                            </tr>
+                                                        </table>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <button id="confirm"
+                                            style="padding: 15px 32px;background-color: #4CAF50; border: none;font-size: 16px;">
+                                        提交
+                                    </button>
+                                    <span id="activityId" style="display:none" th:text=${activityId}></span>
+                                    <span id="bookmaker" style="display:none" th:text=${bookmaker}></span>
+                                    <span id="userId" style="display:none" th:text=${userId}></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </div>
+</div>
+
+<div hidden="true" id="boss-1-option">
+    <option value="1">崩坏腕甲</option>
+    <option value="2">嚎风护腕</option>
+    <option value="3">黑暗秘密编年史</option>
+    <option value="4">回春护腕</option>
+    <option value="5">狂暴镣铐</option>
+    <option value="6">染血肩铠</option>
+    <option value="7">神圣精金护腕</option>
+    <option value="8">寻路者护腕</option>
+    <option value="9">殉难护腕</option>
+    <option value="10">止水长靴</option>
+    <option value="11">致命腕甲</option>
+    <option value="12">追踪匕首</option>
+</div>
+<div hidden="true" id="boss-2-option">
+    <option value="13">阿加多的腰带</option>
+    <option value="14">安纳塞隆的束缚</option>
+    <option value="15">不败的意志</option>
+    <option value="16">大主教的便鞋</option>
+    <option value="17">恶行之刃</option>
+    <option value="18">疾步长靴</option>
+    <option value="19">金色治疗胸甲</option>
+    <option value="20">狂野之柱</option>
+    <option value="21">魔化皮质便鞋</option>
+    <option value="22">闪光的钢铁护肩</option>
+    <option value="23">圣光壁垒</option>
+    <option value="24">怨怒护肩</option>
+</div>
+<div hidden="true" id="boss-3-option">
+    <option value="25">安格莉丝塔的腰带</option>
+    <option value="26">刀锋怒火护肩</option>
+    <option value="27">沸腾怒火腰带</option>
+    <option value="28">黑羽之靴</option>
+    <option value="29">卡兹洛加之心</option>
+    <option value="30">蓝色山羊皮软靴</option>
+    <option value="31">赎罪之锤</option>
+    <option value="32">峡谷猎手腰带</option>
+    <option value="33">新月腰带</option>
+    <option value="34">驯兽者护肩</option>
+    <option value="35">阳炎锁链护腿</option>
+    <option value="36">元素导能护腿</option>
+</div>
+<div hidden="true" id="boss-4-option">
+    <option value="37">防御者的荣耀</option>
+    <option value="38">罗德里格的雨衣</option>
+    <option value="39">秘密商人长裤</option>
+    <option value="40">弯弓护腿</option>
+    <option value="41">无尽的痛苦</option>
+    <option value="42">希望束带</option>
+</div>
+<div hidden="true" id="boss-5-option">
+    <option value="43">阿古斯的使徒</option>
+    <option value="44">安东尼达斯的专注纹章盾</option>
+    <option value="45">混乱风暴</option>
+    <option value="46">净化节杖</option>
+    <option value="47">救世胸恺</option>
+    <option value="48">狂热追击锁甲</option>
+    <option value="49">罗宁之袍</option>
+    <option value="50">闪击强弓</option>
+    <option value="51">无尽怒气腿甲</option>
+    <option value="52">午夜胸甲</option>
+    <option value="53">永恒护腿</option>
+    <option value="54">灾变之刃</option>
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        let bossOne = $('#boss-1-option');
+        $('#one').html(bossOne.html())
+        $('#two').html(bossOne.html())
+        $('#three').html(bossOne.html())
+
+        let userId = $.cookie('userId');
+        alert(userId);
+        if(userId != ''){
+            $('#loginTable').hide();
+        }
+    });
+
+    $('#confirm').click(function () {
+        //校验参数
+        let postData = {
+            chooseBoss: $('#boss').val(),
+            one: {
+                id: $('#one').val(),
+                money: $('#one-money').val()
+            },
+            two: {
+                id: $('#two').val(),
+                money: $('#two-money').val()
+            },
+            three: {
+                id: $('#three').val(),
+                money: $('#three-money').val()
+            },
+            activityId: $('#activityId').text(),
+            bookmaker: $('#bookmaker').text(),
+            userId: $.cookie('userId')
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            url: "/confirm",
+            data: JSON.stringify(postData),
+            success: function (result) {
+                alert("请打开" + result + "查看结果");
+            },
+            error: function (result) {
+                alert("失败请重试");
+            }
+        });
+    });
+
+    $('#login').click(function () {
+        //校验参数
+        let postData = {
+            loginValue: $('#loginValue').val(),
+            pd: $('#pd').val()
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            url: "/login",
+            data: JSON.stringify(postData),
+            success: function (result) {
+                if(result === '登录成功'){
+                    $('#loginTable').hide();
+                }
+            },
+            error: function (result) {
+                alert("登录失败");
+            }
+        });
+    });
+
+    $('#boss').change(function () {
+        if ($(this).val() === '1') {
+            let bossOne = $('#boss-1-option');
+            $('#one').html(bossOne.html())
+            $('#two').html(bossOne.html())
+            $('#three').html(bossOne.html())
+        }
+        if ($(this).val() === '2') {
+            let bossTwo = $('#boss-2-option');
+            $('#one').html(bossTwo.html())
+            $('#two').html(bossTwo.html())
+            $('#three').html(bossTwo.html())
+        }
+        if ($(this).val() === '3') {
+            let bossThree = $('#boss-3-option');
+            $('#one').html(bossThree.html())
+            $('#two').html(bossThree.html())
+            $('#three').html(bossThree.html())
+        }
+        if ($(this).val() === '4') {
+            let bossFour = $('#boss-4-option');
+            $('#one').html(bossFour.html())
+            $('#two').html(bossFour.html())
+            $('#three').html(bossFour.html())
+        }
+        if ($(this).val() === '5') {
+            let bossFive = $('#boss-5-option');
+            $('#one').html(bossFive.html())
+            $('#two').html(bossFive.html())
+            $('#three').html(bossFive.html())
+        }
+    })
+</script>
+</html>
