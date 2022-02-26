@@ -256,9 +256,10 @@
         $('#two').html(bossOne.html())
         $('#three').html(bossOne.html())
 
-        let userId = $.cookie('userId');
-        alert(userId);
-        if(userId != ''){
+        var userId = $.cookie('userId');
+        if(typeof(userId) === 'undefined' || userId === ''){
+            $('#loginTable').show();
+        }else{
             $('#loginTable').hide();
         }
     });
@@ -311,6 +312,8 @@
             success: function (result) {
                 if(result === '登录成功'){
                     $('#loginTable').hide();
+                }else{
+                    alert(result);
                 }
             },
             error: function (result) {
@@ -351,5 +354,6 @@
             $('#three').html(bossFive.html())
         }
     })
+
 </script>
 </html>
