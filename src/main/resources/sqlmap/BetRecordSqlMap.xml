@@ -58,7 +58,7 @@
     </sql>
 
     <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.spring.demo.po.BetRecord">
-        INSERT INTO bet_record
+        INSERT INTO BET_RECORD
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="null!=id">
                 ID  ,
@@ -126,7 +126,7 @@
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.spring.demo.po.BetRecord">
-        UPDATE bet_record
+        UPDATE BET_RECORD
         <set>
             <if test="null!=userId">
                 USER_ID = #{userId, jdbcType=BIGINT} ,
@@ -163,13 +163,13 @@
     <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
-        FROM bet_record
+        FROM BET_RECORD
         WHERE
         ID = #{id}
     </select>
 
     <select id="getListByCondition" parameterType="com.spring.demo.query.BetRecordQuery" resultMap="BaseResultMap">
-        SELECT <include refid="Base_Column_List"/> FROM bet_record
+        SELECT <include refid="Base_Column_List"/> FROM BET_RECORD
         <include refid="findWhere"/>
     </select>
 </mapper>

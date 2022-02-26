@@ -54,7 +54,7 @@
     </sql>
 
     <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.spring.demo.po.BossCalculateRecord">
-        INSERT INTO boss_calculate_record
+        INSERT INTO BOSS_CALCULATE_RECORD
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="null!=id">
                 ID  ,
@@ -116,7 +116,7 @@
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.spring.demo.po.BossCalculateRecord">
-        UPDATE boss_calculate_record
+        UPDATE BOSS_CALCULATE_RECORD
         <set>
 			<if test="null!=bookmaker and ''!=bookmaker ">
                 BOOKMAKER = #{bookmaker, jdbcType=VARCHAR} ,
@@ -150,13 +150,13 @@
     <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List" />
-        FROM boss_calculate_record
+        FROM BOSS_CALCULATE_RECORD
         WHERE
             ID = #{id} 
     </select>
 
     <select id="getListByCondition" parameterType="com.spring.demo.query.BossCalculateRecordQuery" resultMap="BaseResultMap">
-        SELECT <include refid="Base_Column_List"/> FROM boss_calculate_record
+        SELECT <include refid="Base_Column_List"/> FROM BOSS_CALCULATE_RECORD
             <include refid="findWhere"/>
     </select>
 </mapper>
