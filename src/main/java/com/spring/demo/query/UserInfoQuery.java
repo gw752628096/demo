@@ -25,7 +25,7 @@ public class UserInfoQuery {
     /**
      * 登录类型
      */
-    private String loginType;
+    private String nickName;
 
     /**
      * 密码

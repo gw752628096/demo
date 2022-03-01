@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConfirmReq {
-    @NotNull(message = "游戏角色名不能为空")
     private Long userId;
 
     @NotNull(message = "boss选择不能为空")
@@ -27,4 +26,6 @@ public class ConfirmReq {
 
     @NotNull(message = "活动id不能为空")
     private String activityId;
+
+    private Long orderUserId;
 }

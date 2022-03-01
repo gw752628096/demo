@@ -1,5 +1,6 @@
 package com.spring.demo.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateTime;
 import com.spring.demo.enums.BossEnum;
@@ -9,6 +10,7 @@ import com.spring.demo.po.BossCalculateRecord;
 import com.spring.demo.po.UserInfo;
 import com.spring.demo.query.BetRecordQuery;
 import com.spring.demo.query.BossCalculateRecordQuery;
+import com.spring.demo.query.UserInfoQuery;
 import com.spring.demo.request.CalculateBossReq;
 import com.spring.demo.request.CalculateTotalReq;
 import com.spring.demo.request.Goods;
@@ -18,6 +20,7 @@ import com.spring.demo.service.BossCalculateRecordService;
 import com.spring.demo.service.UserInfoService;
 import com.spring.demo.vo.BetRecordVo;
 import com.spring.demo.vo.TotalBetRecordVo;
+import com.spring.demo.vo.UserInfoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -63,7 +66,7 @@ public class ManageController {
         Long activityId = stringRedisTemplate.opsForValue().increment(bookmaker + ".wow.activityId");
         stringRedisTemplate.opsForValue().set(activityId + ".switch", "on", 1, TimeUnit.DAYS);
         log.info("{}开盘 activityId={}", bookmaker, activityId);
-        return "竞猜链接：http://82.157.188.185/orderPage?bookmaker=" + bookmaker;
+        return "竞猜链接：http://82.157.188.185/orderPage2?bookmaker=" + bookmaker;
     }
 
     /**
@@ -273,6 +276,31 @@ public class ManageController {
         model.addAttribute("bookmaker", bookmaker);
 
         return "orderPage";
+    }
+
+    /**
+     * 竞猜页面
+     *
+     * @param model
+     * @param bookmaker
+     * @return
+     */
+    @GetMapping("/orderPage2")
+    public String toOrderPage2(Model model, String bookmaker) {
+        String activityId = stringRedisTemplate.opsForValue().get(bookmaker + ".wow.activityId");
+        model.addAttribute("activityId", activityId);
+        model.addAttribute("bookmaker", bookmaker);
+
+        UserInfoQuery query = new UserInfoQuery();
+        query.setDelFlag(0);
+        List<UserInfo> list = userInfoService.getListByCondition(query);
+        List<UserInfoVo> result = list.stream()
+                .map(userInfo -> BeanUtil.copyProperties(userInfo, UserInfoVo.class))
+                .collect(Collectors.toList());
+
+        model.addAttribute("allUserList", result);
+
+        return "orderPage2";
     }
 
     /**

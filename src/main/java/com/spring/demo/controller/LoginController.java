@@ -5,9 +5,10 @@ import com.spring.demo.po.UserInfo;
 import com.spring.demo.request.RegisterReq;
 import com.spring.demo.service.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -15,8 +16,6 @@ import java.util.Date;
 @Slf4j
 @Controller
 public class LoginController {
-    @Resource
-    private StringRedisTemplate stringRedisTemplate;
     @Resource
     private UserInfoService userInfoService;
     @Resource

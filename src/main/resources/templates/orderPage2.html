@@ -86,31 +86,18 @@
                                                             <tr>
                                                                 <td class=""
                                                                     style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
-                                                                    <p style="font-size: 16px">用户名</p>
-                                                                </td>
-                                                                <td class=""
-                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
-                                                                    <p style="font-size: 16px">密码</p>
-                                                                </td>
-                                                                <td class=""
-                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                    <p style="font-size: 16px">下注人</p>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class=""
                                                                     style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
-                                                                    <input id="loginValue" placeholder="用户名"/>
-                                                                </td>
-                                                                <td class=""
-                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
-                                                                    <input id="pd" type="password" placeholder="密码"/>
-                                                                </td>
-                                                                <td class=""
-                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
-                                                                    <button id="login"
-                                                                            style="background-color: #4CAF50; border: none;font-size: 14px;">
-                                                                        登录
-                                                                    </button>
+                                                                    <select id="orderUserId">
+                                                                        <option th:each="orderUser:${allUserList}"
+                                                                                th:text="${orderUser.nickName}"
+                                                                                th:value="${orderUser.id}">
+                                                                        </option>
+                                                                    </select>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -124,7 +111,7 @@
                                                                     <p style="font-size: 16px">选择boss</p>
                                                                 </td>
                                                                 <td>
-                                                                    <select id="boss" onchange="changeBoss(this)">
+                                                                    <select id="boss">
                                                                         <option value="1">雷基·冬寒（老一）</option>
                                                                         <option value="2">安纳塞隆（老二）</option>
                                                                         <option value="3">卡兹洛加（老三）</option>
@@ -254,13 +241,6 @@
         $('#one').html(bossOne.html())
         $('#two').html(bossOne.html())
         $('#three').html(bossOne.html())
-
-        var userId = $.cookie('userId');
-        if(typeof(userId) === 'undefined' || userId === ''){
-            $('#loginTable').show();
-        }else{
-            $('#loginTable').hide();
-        }
     });
 
     $('#confirm').click(function () {
@@ -281,7 +261,7 @@
             },
             activityId: $('#activityId').text(),
             bookmaker: $('#bookmaker').text(),
-            userId: $.cookie('userId')
+            orderUserId: $('#orderUserId').val()
         }
         $.ajax({
             type: "POST",
@@ -289,34 +269,14 @@
             url: "/confirm",
             data: JSON.stringify(postData),
             success: function (result) {
-                alert("请打开" + result + "查看结果");
-            },
-            error: function (result) {
-                alert("失败请重试");
-            }
-        });
-    });
-
-    $('#login').click(function () {
-        //校验参数
-        let postData = {
-            loginValue: $('#loginValue').val(),
-            pd: $('#pd').val()
-        }
-        $.ajax({
-            type: "POST",
-            contentType: "application/json;charset=UTF-8",
-            url: "/login",
-            data: JSON.stringify(postData),
-            success: function (result) {
-                if(result === '登录成功'){
-                    $('#loginTable').hide();
-                }else{
+                if (result !== 'success') {
                     alert(result);
+                } else {
+                    alert("请刷新管理页面查看结果");
                 }
             },
             error: function (result) {
-                alert("登录失败");
+                alert("失败请重试");
             }
         });
     });

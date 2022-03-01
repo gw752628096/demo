@@ -1,21 +1,19 @@
 package com.spring.demo.controller;
 
-import com.spring.demo.component.UserCookieComponent;
 import com.spring.demo.po.BetRecord;
 import com.spring.demo.request.ConfirmReq;
 import com.spring.demo.request.Goods;
 import com.spring.demo.service.BetRecordService;
-import com.spring.demo.service.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Controller
@@ -23,11 +21,7 @@ public class ConfirmController {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
     @Resource
-    private UserInfoService userInfoService;
-    @Resource
     private BetRecordService betRecordService;
-    @Resource
-    private UserCookieComponent userCookieComponent;
 
     @ResponseBody
     @PostMapping("/confirm")
@@ -39,7 +33,10 @@ public class ConfirmController {
             return "当前已封盘";
         }
 
-        Long userId = confirmReq.getUserId();
+        Long orderUserId = confirmReq.getOrderUserId();
+        if (null == orderUserId || orderUserId <= 0) {
+            orderUserId = confirmReq.getUserId();
+        }
         int chooseBoss = confirmReq.getChooseBoss();
         String bookmaker = confirmReq.getBookmaker();
 
@@ -47,7 +44,7 @@ public class ConfirmController {
         Goods two = confirmReq.getTwo();
         Goods three = confirmReq.getThree();
 
-        saveBetRecord(bookmaker, applyActivityId, userId, chooseBoss, one, two, three);
+        saveBetRecord(bookmaker, applyActivityId, orderUserId, chooseBoss, one, two, three);
 
         // TODO: 2022/2/25 返回结算页面地址
         return "success";
