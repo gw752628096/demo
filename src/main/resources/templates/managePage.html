@@ -247,22 +247,24 @@
     });
 
     $('#start').click(function () {
-        let bookmaker = GetQueryString("bookmaker");
-        //校验参数
-        $.ajax({
-            type: "POST",
-            contentType: "application/text;charset=UTF-8",
-            url: "/start",
-            data: bookmaker,
-            success: function (result) {
-                $('#resultSpan').text(result);
-                $('#calculateBossTable').hide();
-                $('#calculateTotalTable').hide();
-            },
-            error: function (result) {
-                alert("失败请重试");
-            }
-        });
+        if(confirm("这会清除掉当前所有已结算boss的记录信息,确认要重新开盘吗?")){
+            let bookmaker = GetQueryString("bookmaker");
+            //校验参数
+            $.ajax({
+                type: "POST",
+                contentType: "application/text;charset=UTF-8",
+                url: "/start",
+                data: bookmaker,
+                success: function (result) {
+                    $('#resultSpan').text(result);
+                    $('#calculateBossTable').hide();
+                    $('#calculateTotalTable').hide();
+                },
+                error: function (result) {
+                    alert("失败请重试");
+                }
+            });
+        }
     });
 
     $('#startBet').click(function () {
