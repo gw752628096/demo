@@ -156,7 +156,11 @@ public class ManageController {
 
             //压中
             int betMoney = NumberUtils.toInt(betRecord.getMoney());
-            betRecord.setCalculateMoney(String.valueOf((betMoney * 3)));
+            if (BossEnum.BOSS5.getBossId() == betRecord.getBossId()) {
+                betRecord.setCalculateMoney(String.valueOf((betMoney * 4)));
+            } else {
+                betRecord.setCalculateMoney(String.valueOf((betMoney * 3)));
+            }
             betRecordService.updateByPrimaryKeySelective(betRecord);
         }
 
