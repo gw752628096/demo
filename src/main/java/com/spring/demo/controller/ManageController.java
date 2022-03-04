@@ -197,6 +197,7 @@ public class ManageController {
 
         Map<Long, String> nickNameMap = new HashMap<>();
         Map<String, Integer> result = new HashMap<>();
+        Integer total = 0;
         for (BetRecord betRecord : betRecordList) {
             Long userId = betRecord.getUserId();
             if (!nickNameMap.containsKey(userId)) {
@@ -213,6 +214,11 @@ public class ManageController {
             }
         }
 
+        for (Map.Entry<String, Integer> entry : result.entrySet()) {
+            total += entry.getValue();
+        }
+
+        result.put("总计", total);
         List<TotalBetRecordVo> totalRecordList = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : result.entrySet()) {
             TotalBetRecordVo totalBetRecordVo = new TotalBetRecordVo();
