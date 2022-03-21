@@ -156,7 +156,8 @@ public class ManageController {
 
             //压中
             int betMoney = NumberUtils.toInt(betRecord.getMoney());
-            if (BossEnum.BOSS5.getBossId() == betRecord.getBossId()) {
+            if (BossEnum.BOSS5.getBossId() == betRecord.getBossId()
+                    || BossEnum.BOSS4.getBossId() == betRecord.getBossId()) {
                 betRecord.setCalculateMoney(String.valueOf((betMoney * 4)));
             } else {
                 betRecord.setCalculateMoney(String.valueOf((betMoney * 3)));
