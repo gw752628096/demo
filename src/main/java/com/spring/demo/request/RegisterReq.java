@@ -16,5 +16,5 @@ public class RegisterReq {
     private String nickName;
 
     @NotNull(message = "密码不能为空")
-    private String pd;
+    private String password;
 }

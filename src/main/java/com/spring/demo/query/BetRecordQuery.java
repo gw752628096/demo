@@ -33,13 +33,18 @@ public class BetRecordQuery {
     /** money */
     private String money;
 
-    /** money */
+    /** calculateMoney */
     private String calculateMoney;
 
     /** createTime */
     private java.util.Date createTimeBegin;
 
     private java.util.Date createTimeEnd;
+
+    /** updateTime */
+    private java.util.Date updateTimeBegin;
+
+    private java.util.Date updateTimeEnd;
 
     /** delFlag */
     private Integer delFlag;

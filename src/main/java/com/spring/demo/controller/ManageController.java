@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -110,7 +111,7 @@ public class ManageController {
     @ResponseBody
     @PostMapping("/calculateBoss")
     public String calculateBoss(@RequestBody CalculateBossReq calculateBossReq) {
-        Integer chooseBoss = calculateBossReq.getChooseBoss();
+        Integer bossId = calculateBossReq.getBossId();
         String bookmaker = calculateBossReq.getBookmaker();
         String activityId = stringRedisTemplate.opsForValue().get(bookmaker + ".wow.activityId");
 
@@ -122,22 +123,22 @@ public class ManageController {
         BossCalculateRecordQuery query = new BossCalculateRecordQuery();
         query.setBookmaker(bookmaker);
         query.setActivityId(activityId);
-        query.setBossId(chooseBoss);
+        query.setBossId(bossId);
         query.setDelFlag(0);
         List<BossCalculateRecord> bossCalculateRecordList = bossCalculateRecordService.getListByCondition(query);
         if (CollectionUtil.isNotEmpty(bossCalculateRecordList)) {
             return "当前boss已结算！";
         }
 
-        if (Boolean.TRUE.equals(stringRedisTemplate.hasKey("calculate.record." + bookmaker + "." + activityId + "." + chooseBoss))) {
+        if (Boolean.TRUE.equals(stringRedisTemplate.hasKey("calculate.record." + bookmaker + "." + activityId + "." + bossId))) {
             return "当前boss已结算！";
         }
 
-        Set<Integer> calculateGoods = calculateGoods(calculateBossReq);
+        Set<Integer> calculateGoods = calculateBossReq.getGoodsList().stream().map(Goods::getId).collect(Collectors.toSet());
         BetRecordQuery betRecordQuery = new BetRecordQuery();
         betRecordQuery.setActivityId(activityId);
         betRecordQuery.setBookmaker(bookmaker);
-        betRecordQuery.setBossId(chooseBoss);
+        betRecordQuery.setBossId(bossId);
         List<BetRecord> betRecordList = betRecordService.getListByCondition(betRecordQuery);
 
         if (CollectionUtil.isEmpty(betRecordList)) {
@@ -165,7 +166,7 @@ public class ManageController {
             betRecordService.updateByPrimaryKeySelective(betRecord);
         }
 
-        saveCalculateRecord(calculateBossReq, chooseBoss, bookmaker, activityId);
+        saveCalculateRecord(calculateBossReq, bossId, bookmaker, activityId);
 
         return "结算成功，可打开下注开关";
     }
@@ -235,42 +236,20 @@ public class ManageController {
         return calculateTotalResponse;
     }
 
-    private void saveCalculateRecord(CalculateBossReq calculateBossReq, Integer chooseBoss, String bookmaker, String activityId) {
-        stringRedisTemplate.opsForValue().set("calculate.record." + bookmaker + "." + activityId + "." + chooseBoss, "true", 1, TimeUnit.DAYS);
+    private void saveCalculateRecord(CalculateBossReq calculateBossReq, Integer bossId, String bookmaker, String activityId) {
+        stringRedisTemplate.opsForValue().set("calculate.record." + bookmaker + "." + activityId + "." + bossId, "true", 1, TimeUnit.DAYS);
 
-        BossCalculateRecord record = new BossCalculateRecord();
-        record.setBookmaker(bookmaker);
-        record.setActivityId(activityId);
-        record.setBossId(chooseBoss);
-        if (null != calculateBossReq.getOne()) {
-            record.setOne(calculateBossReq.getOne().getId());
+        for (Goods goods : calculateBossReq.getGoodsList()) {
+            BossCalculateRecord record = new BossCalculateRecord();
+            record.setBookmaker(bookmaker);
+            record.setActivityId(activityId);
+            record.setBossId(bossId);
+            record.setGoodsId(goods.getId());
+            record.setCreateTime(new Date());
+            record.setUpdateTime(new Date());
+            record.setDelFlag(0);
+            bossCalculateRecordService.saveSelective(record);
         }
-        if (null != calculateBossReq.getTwo()) {
-            record.setTwo(calculateBossReq.getTwo().getId());
-        }
-        if (null != calculateBossReq.getThree()) {
-            record.setThree(calculateBossReq.getThree().getId());
-        }
-        record.setCreateTime(new Date());
-        record.setDelFlag(0);
-        bossCalculateRecordService.saveSelective(record);
-    }
-
-    private Set<Integer> calculateGoods(CalculateBossReq calculateBossReq) {
-        Set<Integer> calculateGoods = new HashSet<>();
-        Goods one = calculateBossReq.getOne();
-        Goods two = calculateBossReq.getTwo();
-        Goods three = calculateBossReq.getThree();
-        if (null != one && one.getId() > 0) {
-            calculateGoods.add(one.getId());
-        }
-        if (null != two && two.getId() > 0) {
-            calculateGoods.add(two.getId());
-        }
-        if (null != three && three.getId() > 0) {
-            calculateGoods.add(three.getId());
-        }
-        return calculateGoods;
     }
 
     /**
@@ -286,7 +265,7 @@ public class ManageController {
         model.addAttribute("activityId", activityId);
         model.addAttribute("bookmaker", bookmaker);
 
-        return "orderPage";
+        return "orderPage2";
     }
 
     /**

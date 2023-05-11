@@ -36,11 +36,14 @@ public class BetRecord {
     /** money */
     private String money;
 
-    /** money */
+    /** calculateMoney */
     private String calculateMoney;
 
     /** createTime */
     private Date createTime;
+
+    /** updateTime */
+    private Date updateTime;
 
     /** delFlag */
     private Integer delFlag;

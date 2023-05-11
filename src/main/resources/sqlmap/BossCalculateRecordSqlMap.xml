@@ -10,15 +10,14 @@
         <result property="bookmaker" column="BOOKMAKER"/>
         <result property="activityId" column="ACTIVITY_ID"/>
         <result property="bossId" column="BOSS_ID"/>
-        <result property="one" column="ONE"/>
-        <result property="two" column="TWO"/>
-        <result property="three" column="THREE"/>
+        <result property="goodsId" column="GOODS_ID"/>
         <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
         <result property="delFlag" column="DEL_FLAG"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        ID ,BOOKMAKER ,ACTIVITY_ID ,BOSS_ID ,`ONE` ,TWO ,THREE ,CREATE_TIME ,DEL_FLAG 
+        ID ,BOOKMAKER ,ACTIVITY_ID ,BOSS_ID ,GOODS_ID ,CREATE_TIME ,UPDATE_TIME ,DEL_FLAG
     </sql>
 
     <sql id="findWhere">
@@ -32,20 +31,20 @@
             <if test="null!=bossId">
                 AND BOSS_ID = #{bossId}
             </if>
-            <if test="null!=one">
-                AND ONE = #{one}
-            </if>
-            <if test="null!=two">
-                AND TWO = #{two}
-            </if>
-            <if test="null!=three">
-                AND THREE = #{three}
+            <if test="null!=goodsId">
+                AND GOODS_ID = #{goodsId}
             </if>
             <if test="null!=createTimeBegin">
                 AND CREATE_TIME >= #{createTimeBegin}
             </if>
             <if test="null!=createTimeEnd">
                 AND CREATE_TIME &lt; #{createTimeEnd}
+            </if>
+            <if test="null!=updateTimeBegin">
+                AND UPDATE_TIME >= #{updateTimeBegin}
+            </if>
+            <if test="null!=updateTimeEnd">
+                AND UPDATE_TIME &lt; #{updateTimeEnd}
             </if>
             <if test="null!=delFlag">
                 AND DEL_FLAG = #{delFlag}
@@ -68,17 +67,14 @@
             <if test="null!=bossId">
                 BOSS_ID  ,
             </if>
-            <if test="null!=one">
-                `ONE`  ,
-            </if>
-            <if test="null!=two">
-                TWO  ,
-            </if>
-            <if test="null!=three">
-                THREE  ,
+            <if test="null!=goodsId">
+                GOODS_ID  ,
             </if>
             <if test="null!=createTime">
                 CREATE_TIME  ,
+            </if>
+            <if test="null!=updateTime">
+                UPDATE_TIME  ,
             </if>
             <if test="null!=delFlag">
                 DEL_FLAG  
@@ -97,17 +93,14 @@
             <if test="null!=bossId">
                 #{bossId, jdbcType=INTEGER} ,
             </if>
-            <if test="null!=one">
-                #{one, jdbcType=BIGINT} ,
-            </if>
-            <if test="null!=two">
-                #{two, jdbcType=BIGINT} ,
-            </if>
-            <if test="null!=three">
-                #{three, jdbcType=BIGINT} ,
+            <if test="null!=goodsId">
+                #{goodsId, jdbcType=INTEGER} ,
             </if>
             <if test="null!=createTime">
                 #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=updateTime">
+                #{updateTime, jdbcType=TIMESTAMP} ,
             </if>
             <if test="null!=delFlag">
                 #{delFlag, jdbcType=TINYINT} 
@@ -127,18 +120,15 @@
 		    <if test="null!=bossId">
                 BOSS_ID = #{bossId, jdbcType=INTEGER} ,
 		    </if>
-		    <if test="null!=one">
-                `ONE` = #{one, jdbcType=BIGINT} ,
-		    </if>
-		    <if test="null!=two">
-                TWO = #{two, jdbcType=BIGINT} ,
-		    </if>
-		    <if test="null!=three">
-                THREE = #{three, jdbcType=BIGINT} ,
+		    <if test="null!=goodsId">
+                GOODS_ID = #{goodsId, jdbcType=INTEGER} ,
 		    </if>
 		    <if test="null!=createTime">
                 CREATE_TIME = #{createTime, jdbcType=TIMESTAMP} ,
 		    </if>
+            <if test="null!=updateTime">
+                UPDATE_TIME = #{updateTime, jdbcType=TIMESTAMP} ,
+            </if>
 		    <if test="null!=delFlag">
                 DEL_FLAG = #{delFlag, jdbcType=TINYINT} 
 		    </if>

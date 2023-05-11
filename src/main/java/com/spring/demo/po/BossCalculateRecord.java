@@ -27,17 +27,14 @@ public class BossCalculateRecord {
     /** bossId */
     private Integer bossId;
 
-    /** one */
-    private Integer one;
-
-    /** two */
-    private Integer two;
-
-    /** three */
-    private Integer three;
+    /** goodsId */
+    private Integer goodsId;
 
     /** createTime */
     private Date createTime;
+
+    /** updateTime */
+    private Date updateTime;
 
     /** delFlag */
     private Integer delFlag;

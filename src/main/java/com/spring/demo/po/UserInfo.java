@@ -25,7 +25,7 @@ public class UserInfo {
     private String nickName;
 
     /** 密码 */
-    private String pd;
+    private String password;
 
     /** 创建时间戳 */
     private Date createTime;

@@ -27,18 +27,17 @@ public class BossCalculateRecordQuery {
     private Integer bossId;
 
     /** one */
-    private Long one;
-
-    /** two */
-    private Long two;
-
-    /** three */
-    private Long three;
+    private Integer goodsId;
 
     /** createTime */
     private java.util.Date createTimeBegin;
 
     private java.util.Date createTimeEnd;
+
+    /** updateTime */
+    private java.util.Date updateTimeBegin;
+
+    private java.util.Date updateTimeEnd;
 
     /** delFlag */
     private Integer delFlag;

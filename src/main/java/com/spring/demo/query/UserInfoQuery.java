@@ -30,7 +30,7 @@ public class UserInfoQuery {
     /**
      * 密码
      */
-    private String pd;
+    private String password;
 
     /**
      * 创建时间戳

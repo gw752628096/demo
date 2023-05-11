@@ -37,7 +37,7 @@ public class LoginController {
         UserInfo userInfo = new UserInfo();
         userInfo.setLoginValue(registerReq.getLoginValue());
         userInfo.setNickName(registerReq.getNickName());
-        userInfo.setPd(registerReq.getPd());
+        userInfo.setPassword(registerReq.getPassword());
         userInfo.setCreateTime(new Date());
         userInfo.setUpdateTime(new Date());
         userInfo.setDelFlag(0);
@@ -54,7 +54,7 @@ public class LoginController {
             return "当前用户未注册，请注册后登录";
         }
 
-        if (!registerReq.getPd().equals(loginValueInfo.getPd())) {
+        if (!registerReq.getPassword().equals(loginValueInfo.getPassword())) {
             return "用户名或密码错误";
         }
 
