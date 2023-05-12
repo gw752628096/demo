@@ -18,6 +18,11 @@ public class AuthToken {
     private String userId;
 
     /**
+     * 昵称
+     */
+    private String nickName;
+
+    /**
      * 过期时间
      */
     private String exp;

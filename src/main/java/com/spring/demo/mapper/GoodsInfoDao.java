@@ -1,33 +1,32 @@
-/**
+/**    
  * <p> Copyright (c) 2015-2025 微聚未来</p>
  * <p>All Rights Reserved. 保留所有权利. </p>
  */
 
 package com.spring.demo.mapper;
 
-import com.spring.demo.po.BetRecord;
-import com.spring.demo.query.BetRecordQuery;
-
 import java.util.List;
+import com.spring.demo.po.GoodsInfo;
+import com.spring.demo.query.GoodsInfoQuery;
 
 
-public interface BetRecordDao {
+public interface GoodsInfoDao {
 
     /**
      * 插入一行数据，如果字段为null，则不处理
      *
-     * @param betRecord betRecord
+     * @param goodsInfo goodsInfo
      * @return count
      */
-    int saveSelective(BetRecord betRecord);
+    int saveSelective(GoodsInfo goodsInfo);
 
     /**
      * 根据主键更新一行数据，如果字段为null，则不处理
      *
-     * @param betRecord betRecord
+     * @param goodsInfo goodsInfo
      * @return count
      */
-    int updateByPrimaryKeySelective(BetRecord betRecord);
+    int updateByPrimaryKeySelective(GoodsInfo goodsInfo);
 
     /**
      * 根据主键查询一条数据
@@ -35,13 +34,13 @@ public interface BetRecordDao {
      * @param id id
      * @return po
      */
-    BetRecord getByPrimaryKey(Long id);
+    GoodsInfo getByPrimaryKey(Long id);
 
     /**
      * 根据条件查询多条数据
      *
-     * @param betRecordQuery betRecordQuery
+     * @param goodsInfoQuery goodsInfoQuery
      * @return po list
      */
-    List<BetRecord> getListByCondition(BetRecordQuery betRecordQuery);
+    List<GoodsInfo> getListByCondition(GoodsInfoQuery goodsInfoQuery);
 }

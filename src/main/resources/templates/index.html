@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <title>首页</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<body>
+<div id="divMain">
+    <div style="padding: 10px 15px">
+        <center bgcolor="#FFFFFF" style="margin: 0; padding: 0; background-color: #FFFFFF;">
+            <table bgcolor="#002650" style="background-color: #002650;" class="">
+                <tr>
+                    <td bgcolor="#002650" style="background-color: #002650;">
+                        <table class="" width="600" border="0" cellpadding="0" cellspacing="0" align="center"
+                               valign="top" bgcolor="#002650"
+                               style="width: 600px; min-width: 600px; border-spacing: 0; border-collapse: collapse; margin: 0 auto; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word; background-color: #002650;">
+                            <tr>
+                                <td class="" style="padding: 0;" align="center">
+                                    <table class="" width="600" border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td bgcolor="#002650">
+                                                <table width="100%" cellspacing="0" cellpadding="0" border="0"
+                                                       style="width: 100%; min-width: 100%; border-spacing: 0; border-collapse: collapse; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word;">
+                                                    <tr>
+                                                        <table width="100%" cellspacing="0" cellpadding="0" border="0"
+                                                               style="width: 100%; min-width: 100%; border-spacing: 0; border-collapse: collapse; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word;"
+                                                               id="loginTable">
+                                                            <tr>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                    <p style="font-size: 16px">用户名</p>
+                                                                </td>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                    <p style="font-size: 16px">密码</p>
+                                                                </td>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                    <input id="loginValue" placeholder="用户名"/>
+                                                                </td>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                                                                    <input id="password" type="password"
+                                                                           placeholder="密码"/>
+                                                                </td>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; color: #bbbbbb;">
+                                                                    <button id="login"
+                                                                            style="background-color: #4CAF50; border: none;font-size: 14px;">
+                                                                        登 录
+                                                                    </button>
+                                                                </td>
+                                                                <td class=""
+                                                                    style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; color: #bbbbbb;">
+                                                                    <button id="register"
+                                                                            style="background-color: #4CAF50; border: none;font-size: 14px;">
+                                                                        注 册
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript">
+    $('#login').click(function () {
+        //拼接参数
+        let postData = {
+            loginValue: $('#loginValue').val(),
+            password: $('#password').val()
+        }
+        $.ajax({
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            url: "/login",
+            data: JSON.stringify(postData),
+            success: function (result) {
+                if (result.control.error === 0) {
+                    window.open(location.href + "toMyPage?access-token=" + result.data, "_blank");
+                } else {
+                    alert(result.control.message);
+                }
+            },
+            error: function (result) {
+                alert("登录失败");
+            }
+        });
+    });
+</script>
+</html>

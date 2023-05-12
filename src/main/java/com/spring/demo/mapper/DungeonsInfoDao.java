@@ -5,29 +5,29 @@
 
 package com.spring.demo.mapper;
 
-import com.spring.demo.po.BetRecord;
-import com.spring.demo.query.BetRecordQuery;
+import com.spring.demo.po.DungeonsInfo;
+import com.spring.demo.query.DungeonsInfoQuery;
 
 import java.util.List;
 
 
-public interface BetRecordDao {
+public interface DungeonsInfoDao {
 
     /**
      * 插入一行数据，如果字段为null，则不处理
      *
-     * @param betRecord betRecord
+     * @param dungeonsInfo dungeonsInfo
      * @return count
      */
-    int saveSelective(BetRecord betRecord);
+    int saveSelective(DungeonsInfo dungeonsInfo);
 
     /**
      * 根据主键更新一行数据，如果字段为null，则不处理
      *
-     * @param betRecord betRecord
+     * @param dungeonsInfo dungeonsInfo
      * @return count
      */
-    int updateByPrimaryKeySelective(BetRecord betRecord);
+    int updateByPrimaryKeySelective(DungeonsInfo dungeonsInfo);
 
     /**
      * 根据主键查询一条数据
@@ -35,13 +35,13 @@ public interface BetRecordDao {
      * @param id id
      * @return po
      */
-    BetRecord getByPrimaryKey(Long id);
+    DungeonsInfo getByPrimaryKey(Long id);
 
     /**
      * 根据条件查询多条数据
      *
-     * @param betRecordQuery betRecordQuery
+     * @param dungeonsInfoQuery dungeonsInfoQuery
      * @return po list
      */
-    List<BetRecord> getListByCondition(BetRecordQuery betRecordQuery);
+    List<DungeonsInfo> getListByCondition(DungeonsInfoQuery dungeonsInfoQuery);
 }

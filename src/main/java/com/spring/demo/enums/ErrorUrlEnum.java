@@ -3,8 +3,7 @@ package com.spring.demo.enums;
 import org.apache.commons.lang3.StringUtils;
 
 public enum ErrorUrlEnum {
-    COMMON("x-access-token", "/check/error.do"),
-
+    COMMON("access-token", "/enter/error"),
     ;
 
     ErrorUrlEnum(String headerName, String url) {

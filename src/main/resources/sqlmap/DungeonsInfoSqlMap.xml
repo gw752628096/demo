@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.demo.mapper.DungeonsInfoDao">
+
+    <resultMap id="BaseResultMap" type="com.spring.demo.po.DungeonsInfo">
+        <result property="id" column="ID"/>
+        <result property="dungeonsName" column="DUNGEONS_NAME"/>
+        <result property="num" column="NUM"/>
+        <result property="type" column="TYPE"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="delFlag" column="DEL_FLAG"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID ,DUNGEONS_NAME ,NUM ,`TYPE` ,CREATE_TIME ,UPDATE_TIME ,DEL_FLAG 
+    </sql>
+
+    <sql id="findWhere">
+        <where>
+            <if test="null!=dungeonsName and ''!=dungeonsName ">
+                AND DUNGEONS_NAME = #{dungeonsName}
+            </if>
+            <if test="null!=num">
+                AND NUM = #{num}
+            </if>
+            <if test="null!=type and ''!=type ">
+                AND TYPE = #{type}
+            </if>
+            <if test="null!=createTimeBegin">
+                AND CREATE_TIME >= #{createTimeBegin}
+            </if>
+            <if test="null!=createTimeEnd">
+                AND CREATE_TIME &lt; #{createTimeEnd}
+            </if>
+            <if test="null!=updateTimeBegin">
+                AND UPDATE_TIME >= #{updateTimeBegin}
+            </if>
+            <if test="null!=updateTimeEnd">
+                AND UPDATE_TIME &lt; #{updateTimeEnd}
+            </if>
+            <if test="null!=delFlag">
+                AND DEL_FLAG = #{delFlag}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.spring.demo.po.DungeonsInfo">
+        INSERT INTO DUNGEONS_INFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                ID  ,
+            </if>
+            <if test="null!=dungeonsName">
+                DUNGEONS_NAME  ,
+            </if>
+            <if test="null!=num">
+                NUM  ,
+            </if>
+            <if test="null!=type">
+                `TYPE`  ,
+            </if>
+            <if test="null!=createTime">
+                CREATE_TIME  ,
+            </if>
+            <if test="null!=updateTime">
+                UPDATE_TIME  ,
+            </if>
+            <if test="null!=delFlag">
+                DEL_FLAG  
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                #{id, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=dungeonsName">
+                #{dungeonsName, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=num">
+                #{num, jdbcType=INTEGER} ,
+            </if>
+            <if test="null!=type">
+                #{type, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=createTime">
+                #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=updateTime">
+                #{updateTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=delFlag">
+                #{delFlag, jdbcType=TINYINT} 
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.spring.demo.po.DungeonsInfo">
+        UPDATE DUNGEONS_INFO
+        <set>
+			<if test="null!=dungeonsName and ''!=dungeonsName ">
+                DUNGEONS_NAME = #{dungeonsName, jdbcType=VARCHAR} ,
+			</if>
+		    <if test="null!=num">
+                NUM = #{num, jdbcType=INTEGER} ,
+		    </if>
+			<if test="null!=type and ''!=type ">
+                `TYPE` = #{type, jdbcType=VARCHAR} ,
+			</if>
+		    <if test="null!=createTime">
+                CREATE_TIME = #{createTime, jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="null!=updateTime">
+                UPDATE_TIME = #{updateTime, jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="null!=delFlag">
+                DEL_FLAG = #{delFlag, jdbcType=TINYINT} 
+		    </if>
+        </set>
+        WHERE
+            ID = #{id} 
+    </update>
+
+    <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List" />
+        FROM DUNGEONS_INFO
+        WHERE
+            ID = #{id} 
+    </select>
+
+    <select id="getListByCondition" parameterType="com.spring.demo.query.DungeonsInfoQuery" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM DUNGEONS_INFO
+            <include refid="findWhere"/>
+    </select>
+</mapper>

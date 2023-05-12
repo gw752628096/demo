@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 import com.spring.demo.mapper.BossCalculateRecordDao;
 import javax.annotation.Resource;
 
-/**
- * @author Ge Hui
- */
+
 @Service
 public class BossCalculateRecordService {
 

@@ -7,9 +7,7 @@ package com.spring.demo.query;
 
 import lombok.Data;
 
-/**
- * @author Ge Hui
- */
+
 @Data
 public class UserInfoQuery {
     /**

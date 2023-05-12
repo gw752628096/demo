@@ -3,8 +3,6 @@ package com.spring.demo.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateTime;
-import com.spring.demo.enums.BossEnum;
-import com.spring.demo.enums.GoodEnum;
 import com.spring.demo.po.BetRecord;
 import com.spring.demo.po.BossCalculateRecord;
 import com.spring.demo.po.UserInfo;
@@ -30,7 +28,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -155,14 +152,10 @@ public class ManageController {
                 continue;
             }
 
+            // TODO: 2023/5/12 结算比例
             //压中
             int betMoney = NumberUtils.toInt(betRecord.getMoney());
-            if (BossEnum.BOSS5.getBossId() == betRecord.getBossId()
-                    || BossEnum.BOSS4.getBossId() == betRecord.getBossId()) {
-                betRecord.setCalculateMoney(String.valueOf((betMoney * 4)));
-            } else {
-                betRecord.setCalculateMoney(String.valueOf((betMoney * 3)));
-            }
+            betRecord.setCalculateMoney(String.valueOf((betMoney * 3)));
             betRecordService.updateByPrimaryKeySelective(betRecord);
         }
 
@@ -315,8 +308,9 @@ public class ManageController {
         Map<Long, String> userNickNameMap = new HashMap<>();
         List<BetRecordVo> list = betRecordList.stream().map(betRecord -> {
             BetRecordVo betRecordVo = new BetRecordVo();
-            betRecordVo.setBossName(BossEnum.init.get(betRecord.getBossId()).getBossName());
-            betRecordVo.setGoodName(GoodEnum.init.get(betRecord.getGoodsId()).getGoodName());
+
+//            betRecordVo.setBossName(BossEnum.init.get(betRecord.getBossId()).getBossName());
+//            betRecordVo.setGoodName(GoodEnum.init.get(betRecord.getGoodsId()).getGoodName());
             betRecordVo.setMoney(betRecord.getMoney());
             betRecordVo.setTime(DateTime.of(betRecord.getCreateTime()).toString("yyyy-MM-dd HH:mm:ss"));
             betRecordVo.setCalculateMoney(betRecord.getCalculateMoney());

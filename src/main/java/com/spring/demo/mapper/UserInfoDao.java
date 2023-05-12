@@ -11,9 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-/**
- * @author Ge Hui
- */
+
 @Mapper
 public interface UserInfoDao {
 

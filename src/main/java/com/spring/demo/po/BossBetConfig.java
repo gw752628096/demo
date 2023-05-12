@@ -11,30 +11,27 @@ import java.util.Date;
 
 
 @Data
-public class BossCalculateRecord {
+public class BossBetConfig {
 
-    /** id */
+    /** 主键 */
     private Long id;
 
-    /** bookmaker */
-    private String bookmaker;
-
-    /** activityId */
+    /** 活动ID */
     private String activityId;
 
-    /** bossId */
-    private Integer bossId;
+    /** BOSS_ID */
+    private Long bossId;
 
-    /** goodsId */
-    private Integer goodsId;
+    /** BOSS整体赔率 */
+    private String betRate;
 
-    /** createTime */
+    /** 创建时间 */
     private Date createTime;
 
-    /** updateTime */
+    /** 更新时间 */
     private Date updateTime;
 
-    /** delFlag */
+    /** 逻辑删除标识 */
     private Integer delFlag;
 
 }

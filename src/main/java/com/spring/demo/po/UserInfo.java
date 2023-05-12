@@ -9,9 +9,7 @@ import lombok.Data;
 
 import java.util.Date;
 
-/**
- * @author Ge Hui
- */
+
 @Data
 public class UserInfo {
 

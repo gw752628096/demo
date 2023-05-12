@@ -11,33 +11,27 @@ import java.math.BigDecimal;
 
 
 @Data
-public class BossCalculateRecordQuery {
-    /** id */
+public class BossInfoQuery {
+    /** 主键 */
     private Long id;
 
-    /** bookmaker */
-    private String bookmaker;
+    /** BOSS名 */
+    private String bossName;
 
-    /** activityId */
-    private String activityId;
+    /** 副本ID */
+    private Long dungeonsId;
 
-    /** bossId */
-    private Integer bossId;
-
-    /** one */
-    private Integer goodsId;
-
-    /** createTime */
+    /** 创建时间 */
     private java.util.Date createTimeBegin;
 
     private java.util.Date createTimeEnd;
 
-    /** updateTime */
+    /** 更新时间 */
     private java.util.Date updateTimeBegin;
 
     private java.util.Date updateTimeEnd;
 
-    /** delFlag */
+    /** 逻辑删除标识 */
     private Integer delFlag;
 
 }

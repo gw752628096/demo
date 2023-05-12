@@ -9,6 +9,16 @@ public enum ResponseResultInfoEnum implements ResponseCode {
     CHECK_ERROR(-4, "数据验证错误"),
     NO_EXIST_ERROR(-5, "数据不存在"),
     ERROR_AUTH_TOKEN(-2001, "token失效"),
+
+    REGISTER_ALREADY(-1001, "当前用户已注册，请直接登录"),
+
+    NICK_NAME_ERROR(-1002, "当前昵称已占用，请重新注册"),
+
+    NOT_REGISTER_YET(-1003, "当前用户未注册，请注册后登录"),
+
+    LOGIN_INFO_ERROR(-1004, "用户名或密码错误"),
+
+
     ;
     private Integer code;
     private String description;

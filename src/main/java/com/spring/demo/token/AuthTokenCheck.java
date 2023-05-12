@@ -1,9 +1,11 @@
 package com.spring.demo.token;
 
+import com.spring.demo.config.SpringApplicationContext;
 import com.spring.demo.enums.ResponseResultInfoEnum;
 import com.spring.demo.utils.AuthToken;
 import com.spring.demo.utils.AuthTokenUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -14,7 +16,11 @@ public class AuthTokenCheck {
      * Token密钥
      */
     public static final String TOKEN_PARAM_NAME = "access-token";
-    private static final String SECURITY_KEY = "Merry~08162263";
+    private static final StringRedisTemplate stringRedisTemplate;
+
+    static {
+        stringRedisTemplate = (StringRedisTemplate) SpringApplicationContext.getBean("stringRedisTemplate");
+    }
 
     /**
      * 从request中获取原始token
@@ -44,7 +50,7 @@ public class AuthTokenCheck {
         AuthToken authToken;
         try {
             //校验并兼容token的处理
-            authToken = AuthTokenUtils.parseToken(originToken, SECURITY_KEY);
+            authToken = AuthTokenUtils.parseToken(originToken, stringRedisTemplate.opsForValue().get("login.token.encodedKey"));
             if (authToken == null) {
                 return null;
             }

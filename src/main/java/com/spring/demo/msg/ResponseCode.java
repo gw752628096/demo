@@ -1,10 +1,5 @@
 package com.spring.demo.msg;
 
-/**
- * 公共返回枚举
- *
- * @author Ge Hui
- */
 public interface ResponseCode {
 
     /**

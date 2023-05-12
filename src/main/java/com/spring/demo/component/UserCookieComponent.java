@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class UserCookieComponent {
-    public static final String USER_ID = "userId";
+    public static final String USER_ID = "access-token";
 
-    public static final int EXPIRE_TIME = 7 * 24 * 60 * 60;
+    public static final int EXPIRE_TIME = 30 * 24 * 60 * 60;
 
     protected static final String URL_START = "/";
 

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.demo.mapper.GoodsInfoDao">
+
+    <resultMap id="BaseResultMap" type="com.spring.demo.po.GoodsInfo">
+        <result property="id" column="ID"/>
+        <result property="goodsName" column="GOODS_NAME"/>
+        <result property="bossId" column="BOSS_ID"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="delFlag" column="DEL_FLAG"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID ,GOODS_NAME ,BOSS_ID ,CREATE_TIME ,UPDATE_TIME ,DEL_FLAG 
+    </sql>
+
+    <sql id="findWhere">
+        <where>
+            <if test="null!=goodsName and ''!=goodsName ">
+                AND GOODS_NAME = #{goodsName}
+            </if>
+            <if test="null!=bossId and ''!=bossId ">
+                AND BOSS_ID = #{bossId}
+            </if>
+            <if test="null!=createTimeBegin">
+                AND CREATE_TIME >= #{createTimeBegin}
+            </if>
+            <if test="null!=createTimeEnd">
+                AND CREATE_TIME &lt; #{createTimeEnd}
+            </if>
+            <if test="null!=updateTimeBegin">
+                AND UPDATE_TIME >= #{updateTimeBegin}
+            </if>
+            <if test="null!=updateTimeEnd">
+                AND UPDATE_TIME &lt; #{updateTimeEnd}
+            </if>
+            <if test="null!=delFlag">
+                AND DEL_FLAG = #{delFlag}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.spring.demo.po.GoodsInfo">
+        INSERT INTO GOODS_INFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                ID  ,
+            </if>
+            <if test="null!=goodsName">
+                GOODS_NAME  ,
+            </if>
+            <if test="null!=bossId">
+                BOSS_ID  ,
+            </if>
+            <if test="null!=createTime">
+                CREATE_TIME  ,
+            </if>
+            <if test="null!=updateTime">
+                UPDATE_TIME  ,
+            </if>
+            <if test="null!=delFlag">
+                DEL_FLAG  
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="null!=id">
+                #{id, jdbcType=BIGINT} ,
+            </if>
+            <if test="null!=goodsName">
+                #{goodsName, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=bossId">
+                #{bossId, jdbcType=VARCHAR} ,
+            </if>
+            <if test="null!=createTime">
+                #{createTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=updateTime">
+                #{updateTime, jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="null!=delFlag">
+                #{delFlag, jdbcType=TINYINT} 
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.spring.demo.po.GoodsInfo">
+        UPDATE GOODS_INFO
+        <set>
+			<if test="null!=goodsName and ''!=goodsName ">
+                GOODS_NAME = #{goodsName, jdbcType=VARCHAR} ,
+			</if>
+			<if test="null!=bossId and ''!=bossId ">
+                BOSS_ID = #{bossId, jdbcType=VARCHAR} ,
+			</if>
+		    <if test="null!=createTime">
+                CREATE_TIME = #{createTime, jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="null!=updateTime">
+                UPDATE_TIME = #{updateTime, jdbcType=TIMESTAMP} ,
+		    </if>
+		    <if test="null!=delFlag">
+                DEL_FLAG = #{delFlag, jdbcType=TINYINT} 
+		    </if>
+        </set>
+        WHERE
+            ID = #{id} 
+    </update>
+
+    <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List" />
+        FROM GOODS_INFO
+        WHERE
+            ID = #{id} 
+    </select>
+
+    <select id="getListByCondition" parameterType="com.spring.demo.query.GoodsInfoQuery" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM GOODS_INFO
+            <include refid="findWhere"/>
+    </select>
+</mapper>

@@ -9,9 +9,7 @@ import java.util.List;
 import com.spring.demo.po.BossCalculateRecord;
 import com.spring.demo.query.BossCalculateRecordQuery;
 
-/**
- * @author Ge Hui
- */
+
 public interface BossCalculateRecordDao {
 
     /**
