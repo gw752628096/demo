@@ -3,20 +3,16 @@ package com.spring.demo.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateTime;
-import com.spring.demo.po.BetRecord;
-import com.spring.demo.po.BossCalculateRecord;
-import com.spring.demo.po.UserInfo;
-import com.spring.demo.query.BetRecordQuery;
-import com.spring.demo.query.BossCalculateRecordQuery;
-import com.spring.demo.query.UserInfoQuery;
+import com.spring.demo.annotation.VerifyLogin;
+import com.spring.demo.po.*;
+import com.spring.demo.query.*;
 import com.spring.demo.request.CalculateBossReq;
 import com.spring.demo.request.CalculateTotalReq;
 import com.spring.demo.request.Goods;
 import com.spring.demo.response.CalculateTotalResponse;
-import com.spring.demo.service.BetRecordService;
-import com.spring.demo.service.BossCalculateRecordService;
-import com.spring.demo.service.UserInfoService;
+import com.spring.demo.service.*;
 import com.spring.demo.vo.BetRecordVo;
+import com.spring.demo.vo.BossInfoVo;
 import com.spring.demo.vo.TotalBetRecordVo;
 import com.spring.demo.vo.UserInfoVo;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +32,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
+@VerifyLogin
 public class ManageController {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
@@ -45,6 +42,12 @@ public class ManageController {
     private BetRecordService betRecordService;
     @Resource
     private BossCalculateRecordService bossCalculateRecordService;
+    @Resource
+    private DungeonsInfoService dungeonsInfoService;
+    @Resource
+    private BossInfoService bossInfoService;
+    @Resource
+    private GoodsInfoService goodsInfoService;
 
     /**
      * 开盘
@@ -258,22 +261,6 @@ public class ManageController {
         model.addAttribute("activityId", activityId);
         model.addAttribute("bookmaker", bookmaker);
 
-        return "orderPage2";
-    }
-
-    /**
-     * 竞猜页面
-     *
-     * @param model
-     * @param bookmaker
-     * @return
-     */
-    @GetMapping("/orderPage2")
-    public String toOrderPage2(Model model, String bookmaker) {
-        String activityId = stringRedisTemplate.opsForValue().get(bookmaker + ".wow.activityId");
-        model.addAttribute("activityId", activityId);
-        model.addAttribute("bookmaker", bookmaker);
-
         UserInfoQuery query = new UserInfoQuery();
         query.setDelFlag(0);
         List<UserInfo> list = userInfoService.getListByCondition(query);
@@ -283,7 +270,7 @@ public class ManageController {
 
         model.addAttribute("allUserList", result);
 
-        return "orderPage2";
+        return "orderPage";
     }
 
     /**
@@ -327,5 +314,31 @@ public class ManageController {
 
         model.addAttribute("list", list);
         return "managePage";
+    }
+
+    @GetMapping("/betStartPage")
+    public String betStartPage(Model model) {
+        List<DungeonsInfo> dungeonsInfoList = dungeonsInfoService
+                .getListByCondition(new DungeonsInfoQuery());
+        model.addAttribute("dungeonsList", dungeonsInfoList);
+
+        BossInfoQuery bossInfoQuery = new BossInfoQuery();
+        bossInfoQuery.setDungeonsId(1L);
+        List<BossInfo> bossInfoList = bossInfoService.getListByCondition(bossInfoQuery);
+
+        List<BossInfoVo> bossInfoVoList = bossInfoList.stream().map(bossInfo -> {
+            BossInfoVo bossInfoVo = new BossInfoVo();
+            bossInfoVo.setId(bossInfo.getId());
+            bossInfoVo.setBossName(bossInfo.getBossName());
+            bossInfoVo.setDungeonsId(bossInfo.getDungeonsId());
+
+            GoodsInfoQuery goodsInfoQuery = new GoodsInfoQuery();
+            goodsInfoQuery.setBossId(bossInfo.getId());
+            List<GoodsInfo> goodsInfoList = goodsInfoService.getListByCondition(goodsInfoQuery);
+            bossInfoVo.setGoodsList(goodsInfoList);
+            return bossInfoVo;
+        }).collect(Collectors.toList());
+        model.addAttribute("bossList", bossInfoVoList);
+        return "betStartPage";
     }
 }

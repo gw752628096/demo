@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
@@ -16,24 +16,24 @@
                    style="width: 100%; min-width: 100%; border-spacing: 0; border-collapse: collapse; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word;"
                    id="loginTable" bgcolor="#002650">
                 <tr>
-                    <td class=""
-                        style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; color: #bbbbbb;">
+                    <td
+                        style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 20px 20px; color: #bbbbbb;">
                         <p style="font-size: 16px">历史记录</p>
                     </td>
-                    <td class=""
-                        style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left;  color: #bbbbbb;">
-                        <p style="font-size: 16px">我要开盘</p>
+                    <td
+                        style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 20px 20px; color: #bbbbbb;">
+                        <p id="betStart" style="font-size: 16px">我要开盘</p>
                     </td>
                 </tr>
                 <tr>
-                    <td class="" colspan="2"
-                        style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left;  color: #bbbbbb;">
+                    <td  colspan="2"
+                        style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 20px 20px; color: #bbbbbb;">
                         <p style="font-size: 16px">开盘中</p>
                     </td>
                 </tr>
                 <tr th:each="game,index:${list}">
-                    <td class="" colspan="2"
-                        style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left;  color: #bbbbbb;">
+                    <td  colspan="2"
+                        style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 20px 20px; color: #bbbbbb;">
                         <button onclick="toBet()" style="background-color: #4CAF50; border: none;font-size: 14px;">
                             测试
                         </button>
@@ -45,8 +45,14 @@
 </div>
 </body>
 <script type="text/javascript">
-    function toBet(){
+    function toBet() {
         alert(1)
     }
+
+    $('#betStart').click(function () {
+        window.open(location.origin + "/betStartPage" + location.search, "_blank");
+    });
+
+
 </script>
 </html>

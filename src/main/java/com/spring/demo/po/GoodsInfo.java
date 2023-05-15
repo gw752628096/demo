@@ -20,7 +20,7 @@ public class GoodsInfo {
     private String goodsName;
 
     /** 所属BOSS_ID */
-    private String bossId;
+    private Long bossId;
 
     /** 创建时间 */
     private Date createTime;

@@ -11,10 +11,7 @@ import com.spring.demo.utils.AuthTokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -91,5 +88,10 @@ public class LoginController {
         //token写入cookie
         userCookieComponent.addLoginCookie(token);
         return WebResult.of(token);
+    }
+
+    @GetMapping("/registerPage")
+    public String registerPage() {
+        return "registerPage";
     }
 }

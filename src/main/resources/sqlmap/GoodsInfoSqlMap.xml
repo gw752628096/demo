@@ -74,7 +74,7 @@
                 #{goodsName, jdbcType=VARCHAR} ,
             </if>
             <if test="null!=bossId">
-                #{bossId, jdbcType=VARCHAR} ,
+                #{bossId, jdbcType=BIGINT} ,
             </if>
             <if test="null!=createTime">
                 #{createTime, jdbcType=TIMESTAMP} ,
@@ -95,7 +95,7 @@
                 GOODS_NAME = #{goodsName, jdbcType=VARCHAR} ,
 			</if>
 			<if test="null!=bossId and ''!=bossId ">
-                BOSS_ID = #{bossId, jdbcType=VARCHAR} ,
+                BOSS_ID = #{bossId, jdbcType=BIGINT} ,
 			</if>
 		    <if test="null!=createTime">
                 CREATE_TIME = #{createTime, jdbcType=TIMESTAMP} ,

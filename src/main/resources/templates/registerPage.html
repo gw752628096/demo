@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
-    <title>首页</title>
+    <title>注册</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -22,30 +22,35 @@
                     </td>
                     <td
                         style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
-                        <p style="font-size: 16px">密码</p>
-                    </td>
-                    <td style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 20px 20px; color: #bbbbbb;">
-                        <button id="register"
-                                style="background-color: #4CAF50; border: none;font-size: 14px;">
-                            注 册
-                        </button>
+                        <input id="loginValue" placeholder="用户名"/>
                     </td>
                 </tr>
                 <tr>
                     <td
                         style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
-                        <input id="loginValue" placeholder="用户名"/>
+                        <p style="font-size: 16px">密码</p>
                     </td>
                     <td
                         style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
                         <input id="password" type="password"
                                placeholder="密码"/>
                     </td>
+                </tr>
+                <tr>
                     <td
-                        style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 20px 20px;  color: #bbbbbb;">
-                        <button id="login"
+                        style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                        <p style="font-size: 16px">角色名</p>
+                    </td>
+                    <td
+                        style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                        <input id="nickName" placeholder="角色名"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 20px 20px; color: #bbbbbb;">
+                        <button id="register"
                                 style="background-color: #4CAF50; border: none;font-size: 14px;">
-                            登 录
+                            注 册
                         </button>
                     </td>
                 </tr>
@@ -56,33 +61,30 @@
 
 </body>
 <script type="text/javascript">
-    $('#login').click(function () {
+    $('#register').click(function () {
         //拼接参数
         let postData = {
             loginValue: $('#loginValue').val(),
+            nickName: $('#nickName').val(),
             password: $('#password').val()
         }
         $.ajax({
             type: "POST",
             contentType: "application/json;charset=UTF-8",
-            url: "/enter/login",
+            url: "/enter/register",
             data: JSON.stringify(postData),
             success: function (result) {
                 var rst = JSON.parse(result)
                 if (rst.control.error === 0) {
-                    window.open(location.origin + "/toMyPage?access-token=" + rst.data, "_blank");
+                    window.open(location.origin + "/toMyPage?access-token=" + rst.data, "_self");
                 } else {
                     alert(rst.control.message);
                 }
             },
             error: function (result) {
-                alert("登录失败");
+                alert("注册失败");
             }
         });
-    });
-
-    $('#register').click(function () {
-        window.open(location.origin + "/enter/registerPage","_self");
     });
 </script>
 </html>

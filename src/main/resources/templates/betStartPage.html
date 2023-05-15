@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <title>开盘</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<body>
+<div id="divMain">
+    <div style="padding: 10px 15px">
+        <center bgcolor="#FFFFFF" style="margin: 0; padding: 0; background-color: #FFFFFF;">
+            <table bgcolor="#002650" width="100%" cellspacing="0" cellpadding="0" border="0"
+                   style="width: 100%; min-width: 100%; border-spacing: 0; border-collapse: collapse; word-wrap: break-word; word-break: break-word; -ms-word-break: break-word; overflow-wrap: break-word;"
+                   id="loginTable">
+                <tr>
+                    <td style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                        <p style="font-size: 16px">副本</p>
+                    </td>
+                    <td style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                        <select id="dungeonsId">
+                            <option th:each="dungeonsInfo,index:${dungeonsList}"
+                                    th:text="${dungeonsInfo.getNum()} + '人' + ${dungeonsInfo.getType()} + ${dungeonsInfo.getDungeonsName()}"
+                                    th:value="${dungeonsInfo.id}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                        <p style="font-size: 16px">最高下注</p>
+                    </td>
+                    <td style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                        <input id="maxMoney" value="2000"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"
+                        style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 0 40px; color: #bbbbbb;">
+                        <p align="center" style="font-size: 16px"><br></p>
+                        <p align="center" style="font-size: 16px">BOSS赔率配置</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 20px 20px; color: #bbbbbb;">
+                        <p style="font-size: 16px">序号</p>
+                    </td>
+                    <td style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 20px 20px; color: #bbbbbb;">
+                        <p style="font-size: 16px">boss</p>
+                    </td>
+                    <td style=" font-size: 14px; font-weight: 300; line-height: 24px; text-align: left; padding: 20px 20px; color: #bbbbbb;">
+                        <p style="font-size: 16px">赔率</p>
+                    </td>
+                </tr>
+                <tr th:each="boss,index:${bossList}" class="betRateConfig">
+                    <input class="bossId" type="hidden" th:value="${boss.id}">
+                    <td style=" font-size: 14px; font-weight: 300; line-height: 24px; padding-left: 20px; text-align: left; color: #bbbbbb;">
+                        <p style="font-size: 16px" th:text="${index.count}"></p>
+                    </td>
+                    <td style=" font-size: 14px; font-weight: 300; line-height: 24px; padding-left: 20px; text-align: left; color: #bbbbbb;">
+                        <p style="font-size: 16px" th:text="${boss.bossName}"></p>
+                    </td>
+                    <td style=" font-size: 14px; font-weight: 300; line-height: 24px; padding-left: 20px; text-align: left; color: #bbbbbb;">
+                        <input class="bossRate" value="4">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" colspan="3" style="padding: 20px 20px">
+                        <button id="nextStep"
+                                style="background-color: #4CAF50; border: none;font-size: 14px;">
+                            下一步
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript">
+    $("#nextStep").click(function () {
+        var maxMoney = $("#maxMoney").val();
+        var dungeonsId = $("#dungeonsId").val();
+
+        $(".betRateConfig").each(function(){
+            var bossId = $(this).find("input.bossId").val()
+            var bossRate = $(this).find("input.bossRate").val()
+
+
+        });
+    });
+</script>
+</html>

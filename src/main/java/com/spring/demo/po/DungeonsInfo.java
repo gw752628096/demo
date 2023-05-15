@@ -16,13 +16,13 @@ public class DungeonsInfo {
     /** 主键 */
     private Long id;
 
-    /** 下注人的ID */
+    /** 副本名称 */
     private String dungeonsName;
 
     /** 副本人数 */
     private Integer num;
 
-    /** 副本难度 NORMAL/HERO */
+    /** 副本难度 普通/英雄 */
     private String type;
 
     /** 创建时间 */
