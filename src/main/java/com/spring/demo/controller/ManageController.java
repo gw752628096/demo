@@ -42,12 +42,7 @@ public class ManageController {
     private BetRecordService betRecordService;
     @Resource
     private BossCalculateRecordService bossCalculateRecordService;
-    @Resource
-    private DungeonsInfoService dungeonsInfoService;
-    @Resource
-    private BossInfoService bossInfoService;
-    @Resource
-    private GoodsInfoService goodsInfoService;
+
 
     /**
      * 开盘
@@ -316,29 +311,4 @@ public class ManageController {
         return "managePage";
     }
 
-    @GetMapping("/betStartPage")
-    public String betStartPage(Model model) {
-        List<DungeonsInfo> dungeonsInfoList = dungeonsInfoService
-                .getListByCondition(new DungeonsInfoQuery());
-        model.addAttribute("dungeonsList", dungeonsInfoList);
-
-        BossInfoQuery bossInfoQuery = new BossInfoQuery();
-        bossInfoQuery.setDungeonsId(1L);
-        List<BossInfo> bossInfoList = bossInfoService.getListByCondition(bossInfoQuery);
-
-        List<BossInfoVo> bossInfoVoList = bossInfoList.stream().map(bossInfo -> {
-            BossInfoVo bossInfoVo = new BossInfoVo();
-            bossInfoVo.setId(bossInfo.getId());
-            bossInfoVo.setBossName(bossInfo.getBossName());
-            bossInfoVo.setDungeonsId(bossInfo.getDungeonsId());
-
-            GoodsInfoQuery goodsInfoQuery = new GoodsInfoQuery();
-            goodsInfoQuery.setBossId(bossInfo.getId());
-            List<GoodsInfo> goodsInfoList = goodsInfoService.getListByCondition(goodsInfoQuery);
-            bossInfoVo.setGoodsList(goodsInfoList);
-            return bossInfoVo;
-        }).collect(Collectors.toList());
-        model.addAttribute("bossList", bossInfoVoList);
-        return "betStartPage";
-    }
 }

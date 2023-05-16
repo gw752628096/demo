@@ -3,36 +3,40 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.demo.mapper.BossBetConfigDao">
+<mapper namespace="com.spring.demo.mapper.BookmakerRecordDao">
 
-    <resultMap id="BaseResultMap" type="com.spring.demo.po.BossBetConfig">
+    <resultMap id="BaseResultMap" type="com.spring.demo.po.BookmakerRecord">
         <result property="id" column="ID"/>
+        <result property="bookmaker" column="BOOKMAKER"/>
         <result property="activityId" column="ACTIVITY_ID"/>
         <result property="dungeonsId" column="DUNGEONS_ID"/>
-        <result property="bossId" column="BOSS_ID"/>
-        <result property="betRate" column="BET_RATE"/>
+        <result property="maxMoney" column="MAX_MONEY"/>
+        <result property="betStatus" column="BET_STATUS"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="updateTime" column="UPDATE_TIME"/>
         <result property="delFlag" column="DEL_FLAG"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        ID ,ACTIVITY_ID ,DUNGEONS_ID ,BOSS_ID ,BET_RATE ,CREATE_TIME ,UPDATE_TIME ,DEL_FLAG 
+        ID ,BOOKMAKER ,ACTIVITY_ID ,DUNGEONS_ID ,MAX_MONEY ,BET_STATUS ,CREATE_TIME ,UPDATE_TIME ,DEL_FLAG 
     </sql>
 
     <sql id="findWhere">
         <where>
+            <if test="null!=bookmaker">
+                AND BOOKMAKER = #{bookmaker}
+            </if>
             <if test="null!=activityId and ''!=activityId ">
                 AND ACTIVITY_ID = #{activityId}
             </if>
             <if test="null!=dungeonsId">
                 AND DUNGEONS_ID = #{dungeonsId}
             </if>
-            <if test="null!=bossId">
-                AND BOSS_ID = #{bossId}
+            <if test="null!=maxMoney and ''!=maxMoney ">
+                AND MAX_MONEY = #{maxMoney}
             </if>
-            <if test="null!=betRate and ''!=betRate ">
-                AND BET_RATE = #{betRate}
+            <if test="null!=betStatus and ''!=betStatus ">
+                AND BET_STATUS = #{betStatus}
             </if>
             <if test="null!=createTimeBegin">
                 AND CREATE_TIME >= #{createTimeBegin}
@@ -52,11 +56,14 @@
         </where>
     </sql>
 
-    <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.spring.demo.po.BossBetConfig">
-        INSERT INTO BOSS_BET_CONFIG
+    <insert id="saveSelective"  useGeneratedKeys="true" keyProperty="id"  parameterType="com.spring.demo.po.BookmakerRecord">
+        INSERT INTO BOOKMAKER_RECORD
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="null!=id">
                 ID  ,
+            </if>
+            <if test="null!=bookmaker">
+                BOOKMAKER  ,
             </if>
             <if test="null!=activityId">
                 ACTIVITY_ID  ,
@@ -64,11 +71,11 @@
             <if test="null!=dungeonsId">
                 DUNGEONS_ID  ,
             </if>
-            <if test="null!=bossId">
-                BOSS_ID  ,
+            <if test="null!=maxMoney">
+                MAX_MONEY  ,
             </if>
-            <if test="null!=betRate">
-                BET_RATE  ,
+            <if test="null!=betStatus">
+                BET_STATUS  ,
             </if>
             <if test="null!=createTime">
                 CREATE_TIME  ,
@@ -84,17 +91,20 @@
             <if test="null!=id">
                 #{id, jdbcType=BIGINT} ,
             </if>
+            <if test="null!=bookmaker">
+                #{bookmaker, jdbcType=BIGINT} ,
+            </if>
             <if test="null!=activityId">
                 #{activityId, jdbcType=VARCHAR} ,
             </if>
             <if test="null!=dungeonsId">
                 #{dungeonsId, jdbcType=BIGINT} ,
             </if>
-            <if test="null!=bossId">
-                #{bossId, jdbcType=BIGINT} ,
+            <if test="null!=maxMoney">
+                #{maxMoney, jdbcType=VARCHAR} ,
             </if>
-            <if test="null!=betRate">
-                #{betRate, jdbcType=VARCHAR} ,
+            <if test="null!=betStatus">
+                #{betStatus, jdbcType=VARCHAR} ,
             </if>
             <if test="null!=createTime">
                 #{createTime, jdbcType=TIMESTAMP} ,
@@ -108,20 +118,23 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.spring.demo.po.BossBetConfig">
-        UPDATE BOSS_BET_CONFIG
+    <update id="updateByPrimaryKeySelective" parameterType="com.spring.demo.po.BookmakerRecord">
+        UPDATE BOOKMAKER_RECORD
         <set>
+		    <if test="null!=bookmaker">
+                BOOKMAKER = #{bookmaker, jdbcType=BIGINT} ,
+		    </if>
 			<if test="null!=activityId and ''!=activityId ">
                 ACTIVITY_ID = #{activityId, jdbcType=VARCHAR} ,
 			</if>
 		    <if test="null!=dungeonsId">
                 DUNGEONS_ID = #{dungeonsId, jdbcType=BIGINT} ,
 		    </if>
-		    <if test="null!=bossId">
-                BOSS_ID = #{bossId, jdbcType=BIGINT} ,
-		    </if>
-			<if test="null!=betRate and ''!=betRate ">
-                BET_RATE = #{betRate, jdbcType=VARCHAR} ,
+			<if test="null!=maxMoney and ''!=maxMoney ">
+                MAX_MONEY = #{maxMoney, jdbcType=VARCHAR} ,
+			</if>
+			<if test="null!=betStatus and ''!=betStatus ">
+                BET_STATUS = #{betStatus, jdbcType=VARCHAR} ,
 			</if>
 		    <if test="null!=createTime">
                 CREATE_TIME = #{createTime, jdbcType=TIMESTAMP} ,
@@ -140,13 +153,13 @@
     <select id="getByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
             <include refid="Base_Column_List" />
-        FROM BOSS_BET_CONFIG
+        FROM BOOKMAKER_RECORD
         WHERE
             ID = #{id} 
     </select>
 
-    <select id="getListByCondition" parameterType="com.spring.demo.query.BossBetConfigQuery" resultMap="BaseResultMap">
-        SELECT <include refid="Base_Column_List"/> FROM BOSS_BET_CONFIG
+    <select id="getListByCondition" parameterType="com.spring.demo.query.BookmakerRecordQuery" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM BOOKMAKER_RECORD
             <include refid="findWhere"/>
     </select>
 </mapper>

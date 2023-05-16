@@ -6,29 +6,29 @@
 package com.spring.demo.mapper;
 
 import java.util.List;
-import com.spring.demo.po.BossBetConfig;
-import com.spring.demo.query.BossBetConfigQuery;
+import com.spring.demo.po.BookmakerRecord;
+import com.spring.demo.query.BookmakerRecordQuery;
 
 /**
  * @author Ge Hui
  */
-public interface BossBetConfigDao {
+public interface BookmakerRecordDao {
 
     /**
      * 插入一行数据，如果字段为null，则不处理
      *
-     * @param bossBetConfig bossBetConfig
+     * @param bookmakerRecord bookmakerRecord
      * @return count
      */
-    int saveSelective(BossBetConfig bossBetConfig);
+    int saveSelective(BookmakerRecord bookmakerRecord);
 
     /**
      * 根据主键更新一行数据，如果字段为null，则不处理
      *
-     * @param bossBetConfig bossBetConfig
+     * @param bookmakerRecord bookmakerRecord
      * @return count
      */
-    int updateByPrimaryKeySelective(BossBetConfig bossBetConfig);
+    int updateByPrimaryKeySelective(BookmakerRecord bookmakerRecord);
 
     /**
      * 根据主键查询一条数据
@@ -36,13 +36,13 @@ public interface BossBetConfigDao {
      * @param id id
      * @return po
      */
-    BossBetConfig getByPrimaryKey(Long id);
+    BookmakerRecord getByPrimaryKey(Long id);
 
     /**
      * 根据条件查询多条数据
      *
-     * @param bossBetConfigQuery bossBetConfigQuery
+     * @param bookmakerRecordQuery bookmakerRecordQuery
      * @return po list
      */
-    List<BossBetConfig> getListByCondition(BossBetConfigQuery bossBetConfigQuery);
+    List<BookmakerRecord> getListByCondition(BookmakerRecordQuery bookmakerRecordQuery);
 }

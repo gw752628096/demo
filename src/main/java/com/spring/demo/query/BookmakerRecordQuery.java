@@ -13,9 +13,12 @@ import java.math.BigDecimal;
  * @author Ge Hui
  */
 @Data
-public class BossBetConfigQuery {
+public class BookmakerRecordQuery {
     /** 主键 */
     private Long id;
+
+    /** 庄家ID */
+    private Long bookmaker;
 
     /** 活动ID */
     private String activityId;
@@ -23,11 +26,11 @@ public class BossBetConfigQuery {
     /** 副本ID */
     private Long dungeonsId;
 
-    /** BOSS_ID */
-    private Long bossId;
+    /** 最大单柱金额 */
+    private String maxMoney;
 
-    /** BOSS赔率 */
-    private String betRate;
+    /** 1:初始化  2:开盘中  3:已结束 */
+    private String betStatus;
 
     /** 创建时间 */
     private java.util.Date createTimeBegin;

@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import com.spring.demo.mapper.BossBetConfigDao;
 import javax.annotation.Resource;
 
-
+/**
+ * @author Ge Hui
+ */
 @Service
 public class BossBetConfigService {
 
